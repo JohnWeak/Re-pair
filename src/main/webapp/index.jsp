@@ -7,10 +7,6 @@
   </head>
 
   <body>
-    <%
-        String utente = (String) session.getAttribute("utenteLoggato");
-    %>
-    <h2><%=utente%></h2>
 
     <form action="login" method="post">
         <div id="root_div_form">

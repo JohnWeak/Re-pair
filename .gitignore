@@ -6,6 +6,9 @@ target/
 mvnw
 mvnw.cmd
 
+# Don't ignore pom!
+!pom.xml
+
 ### IntelliJ IDEA ###
 .idea
 .idea/modules.xml

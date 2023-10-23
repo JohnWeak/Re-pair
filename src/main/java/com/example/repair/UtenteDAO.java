@@ -9,6 +9,10 @@ import java.sql.SQLException;
 
 public class UtenteDAO
 {
+    /**Metodo per recuperare un utente dal database cercandolo tramite mail e password.
+     * @param mail la mail dell'utente da cercare;
+     * @param password la password dell'utente da cercare.
+     * @return l'utente cercato, se le credenziali sono corrette; <code>null</code> in caso contrario.*/
     public Utente doRetrieveByMailPassword(String mail, String password)
     {
         try (Connection con = ConPool.getConnection())

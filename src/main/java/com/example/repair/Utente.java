@@ -7,6 +7,13 @@ public class Utente
 	
 	public Utente() {}
 	
+	/**
+	 * L'utente (il dipendente) che userà il sistema software
+	 * @param id ID autoassegnato nel database all'utente;
+	 * @param nome Il nome dell'utente;
+	 * @param cognome Il cognome dell'utente;
+	 * @param mail La mail che l'utente userà per il login.
+	 * */
 	public Utente(int id, String nome, String cognome, String mail)
 	{
 		this.id = id;

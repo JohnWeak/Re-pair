@@ -13,6 +13,9 @@ public class UtenteDAO
     {
         try (Connection con = ConPool.getConnection())
         {
+            int id;
+            String nome, cognome, email;
+            
             PreparedStatement ps =
               con.prepareStatement("SELECT id, nome, cognome, mail, password FROM dipendenti WHERE mail=? AND password=?");
             ps.setString(1,mail);
@@ -21,13 +24,12 @@ public class UtenteDAO
             ResultSet rs = ps.executeQuery();
             if (rs.next())
             {
-                Utente utente = new Utente();
-                utente.setId(rs.getInt(1));
-                utente.setNome(rs.getString(2));
-                utente.setCognome(rs.getString(3));
-                utente.setMail(rs.getString(4));
+                id = rs.getInt(1);
+                nome = rs.getString(2);
+                cognome = rs.getString(3);
+                email = rs.getString(4);
                 
-                return utente;
+                return new Utente(id, nome, cognome, email);
             }
             return null;
         } catch (SQLException e) { throw new RuntimeException(e); }

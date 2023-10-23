@@ -25,10 +25,13 @@ public class Login extends HttpServlet
 
         UtenteDAO utenteDAO = new UtenteDAO();
 
-        String utente = utenteDAO.doRetrieveByMailPassword(mail,password);
-
-        session.setAttribute("utenteLoggato",mail);
-
+        Utente utente = utenteDAO.doRetrieveByMailPassword(mail, password);
+        
+        if (utente != null)
+            session.setAttribute("mail",utente.getMail());
+        else
+            session.setAttribute("mail", "errore");
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
         dispatcher.forward(request, response);
 

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.repair.Utente" %><%--
   Created by IntelliJ IDEA.
   User: giovanni
   Date: 17/10/23
@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="home.css">
   <meta charset="UTF-8">
   <title>Re-pair homepage</title>
+  <% String mail = (String) session.getAttribute("mail"); %>
+
 </head>
 <body>
 <header>
@@ -20,7 +22,7 @@
     <div class="div0_figlio">Archivio</div>
   </div>
   <div id="div1">
-    <div id="logout_div">Logout</div>
+    <div id="logout_div"> Mail utente: <%=mail%> </div>
   </div>
 </header>
 </body>

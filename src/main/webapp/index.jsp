@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-        <title>JSP - Hello World</title>
+        <title>Accedi a Re-pair</title>
         <link rel="stylesheet" href="index.css">
   </head>
 

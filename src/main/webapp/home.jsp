@@ -34,7 +34,7 @@
       Utente u = (Utente) session.getAttribute("utenteCercato");
       if (u == null) {
     %>
-    <h2>Ancora nessun utente cercato</h2>
+    <h2>Ancora nessun utente cercato """"""</h2>
     <%} else {%>
 
   <h2><%=u.getNome()%> <%=u.getCognome()%>, <%=u.getMail()%>, <%=u.getId()%></h2>

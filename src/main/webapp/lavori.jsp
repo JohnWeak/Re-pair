@@ -1,3 +1,4 @@
+<jsp:useBean id="utente" scope="session" type="pojo.Utente"/>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="pojo.Riparazione" %>
 <%@ page import="dao.UtenteDAO" %>
@@ -13,14 +14,15 @@
     <title>Re-pair</title>
   </head>
   <body>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Marca</th>
-      <th>Modello</th>
-      <th>Costo</th>
-      <th>Utente a cui è assegnato il lavoro</th>
-    </tr>
+    <p>Ciao, ${utente.nome}. <%if (utente.isAdmin()) {%> -- Sei un admin, me cojoni! <%}%></p>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Marca</th>
+        <th>Modello</th>
+        <th>Costo</th>
+        <th>Utente a cui è assegnato il lavoro</th>
+      </tr>
     <%
         final ArrayList<Riparazione> lista = (ArrayList<Riparazione>) request.getServletContext().getAttribute("listaRiparazioni");
 		if (lista != null)

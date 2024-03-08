@@ -13,6 +13,9 @@
   <title>Login/Search</title>
 </head>
 <body>
+      <form action="cerca-riparazione">
+        <input type="text" name="cerca-riparazione" placeholder="Ricerca riparazione...">
+      </form>
 
       <div class="container" id="container">
         <div class="box"></div>
@@ -43,21 +46,21 @@
             <div class="form-item log-in">
               <div class="table">
                 <div class="table-cell">
-                  <input name="Username" placeholder="Username" type="text" >
-                  <input name="Password" placeholder="Password" type="password">
-                  <div class="btn" id="loginButton">
-                    Log-In
-                  </div>
+                  <form action="login" method="post">
+                    <input name="mail" placeholder="Mail" type="email" >
+                    <input name="password" placeholder="Password" type="password">
+                    <input type="submit" class="btn" id="loginButton" value="Login">
+                  </form>
                 </div>
               </div>
             </div>
             <div class="form-item search">
               <div class="table">
                 <div class="table-cell">
-                  <input name="search" placeholder="Search..." type="text" >
-                  <div class="btn" id="searchButton">
-                    Cerca
-                  </div>
+                  <form action="cerca-riparazione">
+                    <input name="cerca-riparazione" placeholder="Cerca riparazione" type="text" >
+                    <input type="submit" class="btn" id="searchButton" value="Cerca">
+                  </form>
                 </div>
               </div>
             </div>

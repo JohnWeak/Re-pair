@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="pojo.Riparazione" %>
 <%@ page import="dao.UtenteDAO" %>
+<%@ page import="pojo.Utente" %>
 <%--
   Created by IntelliJ IDEA.
   User: Giovanni Liguori
@@ -29,13 +30,13 @@
 		{
 		    for (Riparazione r : lista)
 			{
-                final String assegnato = r.getAssegnato() <= 0 ? "Nessuno" : UtenteDAO.doRetrieveByID(r.getAssegnato()).getNome();%>
+                final Utente assegnato = r.getAssegnato() <= 0 ? null : UtenteDAO.doRetrieveByID(r.getAssegnato());%>
       <tr>
         <td> <%=r.getId()%> </td>
         <td> <%=r.getMarca()%> </td>
         <td> <%=r.getModello()%> </td>
         <td> <%=r.getCosto()%>€ </td>
-        <td> <%=assegnato%> </td>
+        <td> <% if (assegnato != null){%> <%=assegnato.getNome()%> <%=assegnato.getCognome()%> <%}%></td>
       </tr>
             <%}
         }

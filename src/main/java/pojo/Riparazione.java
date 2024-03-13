@@ -8,12 +8,13 @@ public class Riparazione
 	
 	public Riparazione(){}
 	
-	public Riparazione(String marca, String modello, String status, int costo)
+	public Riparazione(String marca, String modello, String status, int costo, String nota)
 	{
 		this.marca = marca;
 		this.modello = modello;
 		this.status = status;
 		this.costo = costo;
+		this.nota = nota;
 	}
 	
 	// GETTER

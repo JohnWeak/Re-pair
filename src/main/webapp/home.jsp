@@ -13,60 +13,60 @@
   <title>Login/Search</title>
 </head>
 <body>
-      <form action="cerca-riparazione">
-        <input type="text" name="cerca-riparazione" placeholder="Ricerca riparazione...">
-      </form>
 
-      <div class="container" id="container">
-        <div class="box"></div>
-        <div class="container-forms">
-          <div class="container-info">
-            <div class="info-item">
-              <div class="table">
-                <div class="table-cell">
-                  <p>Sei un'utente?</p>
-                  <div class="btn" id="login">
-                    Log-In
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="info-item">
-              <div class="table">
-                <div class="table-cell">
-                  <p>Sono un cliente!</p>
-                  <div class="btn" id="cerca">
-                    Ricerca Qui!
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="container-form">
-            <div class="form-item log-in">
-              <div class="table">
-                <div class="table-cell">
-                  <form action="login" method="post">
-                    <input name="mail" placeholder="Mail" type="email" >
-                    <input name="password" placeholder="Password" type="password">
-                    <input type="submit" class="btn" id="loginButton" value="Login">
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="form-item search">
-              <div class="table">
-                <div class="table-cell">
-                  <form action="cerca-riparazione">
-                    <input name="cerca-riparazione" placeholder="Cerca riparazione" type="text" >
-                    <input type="submit" class="btn" id="searchButton" value="Cerca">
-                  </form>
-                </div>
-              </div>
+<div class="logo">
+  <a href="/"><img src='https://i.postimg.cc/qhMSGsGS/1709739159071stxt4cdl-removebg-preview.png' border='0' alt='1709739159071stxt4cdl-removebg-preview'/></a>
+</div>
+
+<div class="container" id="container">
+  <div class="container-forms">
+    <div class="container-info">
+      <div class="info-item">
+        <div class="table">
+          <div class="table-cell">
+            <p>Sei un'utente?</p>
+            <div class="btn" id="login">
+              Log-In
             </div>
           </div>
         </div>
       </div>
+      <div class="info-item">
+        <div class="table">
+          <div class="table-cell">
+            <p>Sono un cliente!</p>
+            <div class="btn" id="cerca">
+              Ricerca Qui!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-form">
+      <div class="form-item log-in">
+        <div class="table">
+          <div class="table-cell">
+            <input name="mail" placeholder="Mail" type="email" />
+            <input name="password" placeholder="Password" type="password" />
+            <div class="btn" id="loginButton">
+              Log in
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-item search">
+        <div class="table">
+          <div class="table-cell">
+            <input name="cerca-riparazione" placeholder="Cerca riparazione" type="text" />
+            <div class="btn" id="searchButton">
+              Cerca
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 

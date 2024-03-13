@@ -135,8 +135,9 @@ public abstract class UtenteDAO
 			final String nome = rs.getString(2);
 			final String cognome = rs.getString(3);
 			final String mail = rs.getString(4);
+			final boolean admin = rs.getBoolean(6);
 			
-			utente = new Utente(id, nome, cognome, mail);
+			utente = new Utente(id, nome, cognome, mail, admin);
 		}catch (Exception e) { e.printStackTrace(); }
 		
 		return utente;

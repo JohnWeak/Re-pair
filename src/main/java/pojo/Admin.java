@@ -3,7 +3,7 @@ package pojo;
 import dao.AdminDAO;
 
 /**@author Giovanni Liguori*/
-public class Admin extends Dipendente
+public class Admin extends Utente
 {
 	
 	public void creaUtente(String nome, String cognome, String mail, String password)

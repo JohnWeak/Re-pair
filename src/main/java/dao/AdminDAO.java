@@ -36,7 +36,7 @@ public abstract class AdminDAO
 	}
 	
 	
-	public static void doCreateUtente(String nome, String cognome, String mail, String password)
+	public static void doCreaUtente(String nome, String cognome, String mail, String password)
 	{
 		try
 		{
@@ -51,7 +51,7 @@ public abstract class AdminDAO
 		}catch (Exception e) { e.printStackTrace(); }
 	}
 	
-	public static void doEdit(int id, String nome, String cognome, String mail, String password)
+	public static void doModificaUtente(int id, String nome, String cognome, String mail, String password)
 	{
 		try
 		{
@@ -67,16 +67,58 @@ public abstract class AdminDAO
 		}catch (Exception e) { e.printStackTrace(); }
 	}
 	
-	public static void doDelete(int id)
+	public static void doCancella(int id, boolean utente)
+	{
+		final PreparedStatement ps;
+		try
+		{
+			final Connection con = ConPool.getConnection();
+			if (utente)
+			{
+				ps = con.prepareStatement("DELETE FROM utenti WHERE id=?");
+			}
+			else
+			{
+				ps = con.prepareStatement("DELETE FROM riparazioni WHERE id=?");
+			}
+			
+			ps.setInt(1, id);
+			ps.executeQuery();
+			
+		}catch (Exception e) { e.printStackTrace(); }
+	}
+	
+	public static void doCreaRiparazione(String marca, String modello, int costo)
 	{
 		try
 		{
 			final Connection con = ConPool.getConnection();
-			final PreparedStatement ps = con.prepareStatement("DELETE FROM utenti WHERE id=?");
-			ps.setInt(1, id);
+			final PreparedStatement ps = con.prepareStatement("INSERT INTO riparazioni (`marca`, `modello`, `costo`) VALUES (?,?,?)");
+			ps.setString(1, marca);
+			ps.setString(2, modello);
+			ps.setInt(3, costo);
 			
 			ps.executeQuery();
 		}catch (Exception e) { e.printStackTrace(); }
+	}
+	
+	public static void doModificaRiparazione(int id, String marca, String modello, String status, String nota, int costo, int assegnato)
+	{
+		try
+		{
+			final Connection con = ConPool.getConnection();
+			final PreparedStatement ps = con.prepareStatement("UPDATE riparazioni SET marca=?,modello=?,status=?,nota=?,costo=?,assegnato=? WHERE id = ?");
+			ps.setString(1, marca);
+			ps.setString(2, modello);
+			ps.setString(3, status);
+			ps.setString(4, nota);
+			ps.setInt(5,costo);
+			ps.setInt(6,assegnato);
+			ps.setInt(7, id);
+			
+			ps.executeUpdate();
+		}catch (Exception e) { e.printStackTrace(); }
+		
 	}
 	
 }

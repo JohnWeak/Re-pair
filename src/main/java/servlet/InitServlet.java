@@ -30,6 +30,5 @@ public class InitServlet implements ServletContextListener
 		context.setAttribute("listaRiparazioni", listaRiparazioni);
 		context.setAttribute("listaUtenti", listaUtenti);
 		context.setAttribute("listaAdmin",listaAdmin);
-		
 	}
 }

@@ -87,7 +87,46 @@ public abstract class UtenteDAO
 		return utente;
 	}
 	
-	public static Utente newObjectUtente(ResultSet rs)
+	public static void doModificaNotaRiparazione(int id, String nota)
+	{
+		try
+		{
+			final Connection con = ConPool.getConnection();
+			final PreparedStatement ps = con.prepareStatement("UPDATE riparazioni SET nota=? WHERE id=?");
+			ps.setString(1,nota);
+			ps.setInt(2,id );
+			ps.executeUpdate();
+		}catch (Exception e) { e.printStackTrace(); }
+		
+	}
+	
+	public static void doModificaStatusRiparazione(int id, String status)
+	{
+		try
+		{
+			final Connection con = ConPool.getConnection();
+			final PreparedStatement ps = con.prepareStatement("UPDATE riparazioni SET status=? WHERE id=?");
+			ps.setString(1,status);
+			ps.setInt(2,id );
+			ps.executeUpdate();
+		}catch (Exception e) { e.printStackTrace(); }
+		
+	}
+	
+	public static void doAssegnaRiparazione(int idRiparazione, int idUtente)
+	{
+		try
+		{
+			final Connection con = ConPool.getConnection();
+			final PreparedStatement ps = con.prepareStatement("UPDATE riparazioni SET assegnato=? WHERE id=?");
+			ps.setInt(1,idUtente);
+			ps.setInt(2,idRiparazione);
+			ps.executeUpdate();
+		}catch (Exception e) { e.printStackTrace(); }
+		
+	}
+	
+	private static Utente newObjectUtente(ResultSet rs)
 	{
 		Utente utente = null;
 		try
@@ -96,10 +135,8 @@ public abstract class UtenteDAO
 			final String nome = rs.getString(2);
 			final String cognome = rs.getString(3);
 			final String mail = rs.getString(4);
-			// final String password = rs.getString(5);
-			final boolean isAdmin = rs.getBoolean(6);
 			
-			utente = new Utente(id, nome, cognome, mail, isAdmin);
+			utente = new Utente(id, nome, cognome, mail);
 		}catch (Exception e) { e.printStackTrace(); }
 		
 		return utente;

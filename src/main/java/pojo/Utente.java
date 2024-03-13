@@ -1,9 +1,10 @@
 package pojo;
 
+import dao.UtenteDAO;
+
 /**@author Giovanni Liguori*/
 public class Utente extends Dipendente
 {
-	private boolean isAdmin = false;
 	
 	// Costruttore vuoto per permettere al DAO di istanziare un nuovo utente tramite i setter
 	public Utente() {}
@@ -15,25 +16,29 @@ public class Utente extends Dipendente
 	 * @param cognome Il cognome dell'utente
 	 * @param mail La mail che l'utente userà per il login
 	 * */
-	public Utente(int id, String nome, String cognome, String mail, boolean isAdmin)
+	public Utente(int id, String nome, String cognome, String mail)
 	{
 		super.setId(id);
 		super.setNome(nome);
 		super.setCognome(cognome);
 		super.setMail(mail);
-		this.isAdmin = isAdmin;
 	}
 	
-	// GETTER
-	public boolean isAdmin()
+	
+	public void autoAssegna(int idRiparazione)
 	{
-		return isAdmin;
+		UtenteDAO.doAssegnaRiparazione(idRiparazione, getId());
 	}
 	
-	// SETTER
-	public void setAdmin(boolean isAdmin)
+	public void archivia(int idRiparazione, String status)
 	{
-		this.isAdmin = isAdmin;
+		UtenteDAO.doModificaStatusRiparazione(idRiparazione,status);
 	}
+	
+	public void annota(int idRiparazione, String nota)
+	{
+		UtenteDAO.doModificaNotaRiparazione(idRiparazione,nota);
+	}
+	
 	
 } // fine classe Utente

@@ -8,21 +8,26 @@ public class Admin extends Dipendente
 	
 	public void creaUtente(String nome, String cognome, String mail, String password)
 	{
-		AdminDAO.doCreateUtente(nome, cognome, mail, password);
-	}
-	
-	public void rimuoviUtente(int id)
-	{
-		AdminDAO.doDelete(id);
+		AdminDAO.doCreaUtente(nome, cognome, mail, password);
 	}
 	
 	public void modificaUtente(int id, String nome, String cognome, String mail, String password)
 	{
-		AdminDAO.doEdit(id, nome, cognome, mail, password);
+		AdminDAO.doModificaUtente(id, nome, cognome, mail, password);
 	}
 	
-	public boolean isAdmin()
+	public void rimuovi(int id, boolean utente)
 	{
-		return true;
+		AdminDAO.doCancella(id, utente);
+	}
+	
+	public void creaRiparazione(String marca, String modello, int costo)
+	{
+		AdminDAO.doCreaRiparazione(marca,modello,costo);
+	}
+	
+	public void modificaRiparazione(int id, String marca, String modello, String status, String nota, int costo, int assegnato)
+	{
+		AdminDAO.doModificaRiparazione(id, marca, modello, status, nota, costo, assegnato);
 	}
 }

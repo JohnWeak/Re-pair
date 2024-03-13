@@ -51,15 +51,10 @@ public class CercaRiparazione extends HttpServlet
 					break;
 				}
 			}
-			
-			System.out.println("Sto eseguendo nonostante l'id fosse legale, smh");
 			req.setAttribute("errore", "L'ID cercato non corrisponde ad alcuna riparazione.");
 			errorDispatcher.forward(req,resp);
 			
 		}
-		
-		
-		
 		
 	}
 }

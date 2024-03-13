@@ -24,6 +24,10 @@ body {
     height: 100%;
 }
 
+p {
+    color: black;
+}
+
 .table-cell {
     display: table-cell;
     vertical-align: middle;
@@ -39,7 +43,7 @@ body {
     left: 30%;
     width: 38rem;
     height: 20rem;
-    background-color: #292929;
+    background-color: #c2c5cc;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -53,6 +57,20 @@ body {
 }
 
 .container .btn {
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+    width: 60px;
+    color: #fff;
+    background-color: #4e4e4e;
+    opacity: 1;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.table-cell .btn {
     cursor: pointer;
     text-align: center;
     margin: 0 auto;

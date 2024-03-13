@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <style><%@include file="WEB-INF/HTML-CSS/CSS/login-search.css"%></style>
-<script><%@include file="WEB-INF/HTML-CSS/JS/login-search.js"%></script>
+
 <head>
   <title>Login/Search</title>
 </head>
-<body>
+<body bgcolor="708090">
 
 <div class="logo">
   <a href="/"><img src='https://i.postimg.cc/qhMSGsGS/1709739159071stxt4cdl-removebg-preview.png' border='0' alt='1709739159071stxt4cdl-removebg-preview'/></a>
@@ -35,6 +35,7 @@
         <div class="table">
           <div class="table-cell">
             <p>Sono un cliente!</p>
+            <input type="search" placeholder="Ricerca la tua riparazione!!!" name="search" id="search-input">
             <div class="btn" id="cerca">
               Ricerca Qui!
             </div>
@@ -50,16 +51,6 @@
             <input name="password" placeholder="Password" type="password" />
             <div class="btn" id="loginButton">
               Log in
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-item search">
-        <div class="table">
-          <div class="table-cell">
-            <input name="cerca-riparazione" placeholder="Cerca riparazione" type="text" />
-            <div class="btn" id="searchButton">
-              Cerca
             </div>
           </div>
         </div>

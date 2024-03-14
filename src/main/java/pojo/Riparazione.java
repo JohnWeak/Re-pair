@@ -4,17 +4,18 @@ package pojo;
 public class Riparazione
 {
 	private int id, costo, assegnato;
-	private String marca, modello, status, nota;
+	private String marca, modello, status, nota, mailCliente;
 	
 	public Riparazione(){}
 	
-	public Riparazione(String marca, String modello, String status, int costo, String nota)
+	public Riparazione(String marca, String modello, String status, int costo, String nota, String mailCliente)
 	{
 		this.marca = marca;
 		this.modello = modello;
 		this.status = status;
 		this.costo = costo;
 		this.nota = nota;
+		this.mailCliente = mailCliente;
 	}
 	
 	// GETTER
@@ -46,11 +47,10 @@ public class Riparazione
 	{
 		return assegnato;
 	}
-	public String getAll()
+	public String getMailCliente()
 	{
-		return "Il tuo " + marca + " " + modello + " è in fase di<br/>" + status;
+		return mailCliente;
 	}
-	
 	
 	// SETTER
 	public void setMarca(String marca)
@@ -81,5 +81,9 @@ public class Riparazione
 	{
 		this.assegnato = assegnato;
 	}
-	
+	public void setMailCliente(String mailCliente)
+	{
+		this.mailCliente = mailCliente;
+	}
+
 }

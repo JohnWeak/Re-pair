@@ -25,12 +25,26 @@ public abstract class ClienteDAO
 				c.setMail(rs.getString(1));
 				c.setNome(rs.getString(2));
 				
-				
 				list.add(c);
-				
 			}
 		}catch (Exception e) { e.printStackTrace(); }
 		
 		return list;
 	}
+	
+	public static Cliente doCercaClienteByMail(String mail)
+	{
+		Cliente toReturn = null;
+		final var list = doRetrieveAll();
+		for (Cliente c : list)
+		{
+			if (c.getMail().equals(mail))
+			{
+				toReturn = c;
+				break;
+			}
+		}
+		return toReturn;
+	}
+	
 }

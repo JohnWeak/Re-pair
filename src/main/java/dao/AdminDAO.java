@@ -34,32 +34,35 @@ public abstract class AdminDAO
 	}
 	
 	
-	public static void doCreaUtente(String nome, String cognome, String mail, String password)
+	public static void doCreaUtente(String nome, String cognome, String mail, String password, boolean admin)
 	{
 		try
 		{
 			final Connection con = ConPool.getConnection();
-			final PreparedStatement ps = con.prepareStatement("INSERT INTO utenti (`nome`, `cognome`, `mail`, `password`) VALUES (?,?,?,?)");
+			final PreparedStatement ps = con.prepareStatement("INSERT INTO utenti (`nome`, `cognome`, `mail`, `password`, `isAdmin`) VALUES (?,?,?,?,?)");
 			ps.setString(1, nome);
 			ps.setString(2, cognome);
 			ps.setString(3, mail);
 			ps.setString(4, password);
+			ps.setBoolean(4, admin);
 			
 			ps.executeQuery();
 		}catch (Exception e) { e.printStackTrace(); }
 	}
 	
-	public static void doModificaUtente(int id, String nome, String cognome, String mail, String password)
+	public static void doModificaUtente(int id, String nome, String cognome, String mail, String password, boolean admin)
 	{
 		try
 		{
 			final Connection con = ConPool.getConnection();
-			final PreparedStatement ps = con.prepareStatement("UPDATE utenti SET nome=?,cognome=?,mail=?,password=? WHERE id = ?");
+			final PreparedStatement ps = con.prepareStatement("UPDATE utenti SET nome=?,cognome=?,mail=?,password=?,isAdmin=? WHERE id = ?");
 			ps.setString(1, nome);
 			ps.setString(2, cognome);
 			ps.setString(3, mail);
 			ps.setString(4, password);
-			ps.setInt(5, id);
+			ps.setBoolean(5,admin);
+			ps.setInt(6, id);
+			
 			
 			ps.executeUpdate();
 		}catch (Exception e) { e.printStackTrace(); }

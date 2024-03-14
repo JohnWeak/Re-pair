@@ -6,14 +6,14 @@ import dao.AdminDAO;
 public class Admin extends Utente
 {
 	
-	public void creaUtente(String nome, String cognome, String mail, String password)
+	public void creaUtente(String nome, String cognome, String mail, String password, boolean admin)
 	{
-		AdminDAO.doCreaUtente(nome, cognome, mail, password);
+		AdminDAO.doCreaUtente(nome, cognome, mail, password, admin);
 	}
 	
-	public void modificaUtente(int id, String nome, String cognome, String mail, String password)
+	public void modificaUtente(int id, String nome, String cognome, String mail, String password, boolean admin)
 	{
-		AdminDAO.doModificaUtente(id, nome, cognome, mail, password);
+		AdminDAO.doModificaUtente(id, nome, cognome, mail, password, admin);
 	}
 	
 	public void rimuovi(int id, boolean utente)

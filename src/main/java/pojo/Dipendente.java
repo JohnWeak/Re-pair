@@ -4,7 +4,7 @@ package pojo;
 public abstract class Dipendente
 {
 	private int id;
-	private String mail, nome, cognome;
+	private String mail, nome, cognome, password;
 	
 	// GETTER
 	public String getMail()
@@ -22,6 +22,10 @@ public abstract class Dipendente
 	public int getId()
 	{
 		return id;
+	}
+	public String getPassword()
+	{
+		return password;
 	}
 	
 	// SETTER
@@ -41,6 +45,9 @@ public abstract class Dipendente
 	{
 		this.id = id;
 	}
-	
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
 	
 }

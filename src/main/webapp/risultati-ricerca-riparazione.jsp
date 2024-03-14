@@ -12,7 +12,7 @@
       <%
           char lettera = 'i';
           final ArrayList<Riparazione> listaRiparazioni = (ArrayList<Riparazione>) request.getServletContext().getAttribute("listaRiparazioni");
-		  final String ricerca = request.getParameter("cerca-riparazione");
+		  final String ricerca = request.getParameter("search");
 		  if (listaRiparazioni != null)
 		  {
 			  if (listaRiparazioni.size() == 1)
@@ -23,14 +23,17 @@
   </head>
   <body>
     <%
-        for (Riparazione r : listaRiparazioni)
-		{
-			if (r.getId() == Integer.parseInt(ricerca))
-            {
+        if (listaRiparazioni != null)
+        {
+			for (Riparazione r : listaRiparazioni)
+		    {
+			    if (r.getId() == Integer.parseInt(ricerca))
+                {
         %>
         <div>
             <%=r.getId()%> - <%=r.getMarca()%> <%=r.getModello()%>
         </div>
+            <%}%>
         <%}
 		}
     %>
@@ -39,9 +42,11 @@
     <a><img src='https://i.postimg.cc/qhMSGsGS/1709739159071stxt4cdl-removebg-preview.png' border='0' alt='1709739159071stxt4cdl-removebg-preview'/></a>
 </div>
 
+    <form action="cerca-riparazione">
 <div class="search">
     <input type="search" placeholder="Ricerca la tua riparazione!!!" name="search" id="search-input">
 </div>
+    </form>
 
 <div class="ricercaeffettuata">
     <p>Ricerca Effettuata</p>

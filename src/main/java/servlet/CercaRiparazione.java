@@ -29,7 +29,7 @@ public class CercaRiparazione extends HttpServlet
 		final RequestDispatcher searchDispatcher = req.getRequestDispatcher(workSearchPage);
 		final RequestDispatcher errorDispatcher = req.getRequestDispatcher(errorPage);
 		
-		final String workID = req.getParameter("cerca-riparazione");
+		final String workID = req.getParameter("search");
 		resp.setContentType("text/html");
 		
 		if (workID == null || workID.isBlank())

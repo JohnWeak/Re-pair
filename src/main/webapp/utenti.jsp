@@ -35,7 +35,16 @@
                   <td>
                     <form action="dettaglio-utente">
                       <input type="hidden" name="idUtente" value="<%=u.getId()%>">
+                      <input type="hidden" name="tipo" value="modifica">
                       <input type="submit" name="" value="Modifica Utente">
+                    </form>
+                  </td>
+                  <td>
+                    <form action="gestione-utente">
+                      <input type="hidden" name="idUtente" value="<%=u.getId()%>">
+                      <input type="hidden" name="tipo" value="cancella">
+
+                      <input type="submit" name="" value="CANCELLA Utente"/>
                     </form>
                   </td>
               </tr>

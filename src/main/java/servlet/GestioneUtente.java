@@ -25,30 +25,45 @@ public class GestioneUtente extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		final RequestDispatcher error = req.getRequestDispatcher("error.jsp");
-		final RequestDispatcher ok = req.getRequestDispatcher("dettaglioutente.jsp");
+		final RequestDispatcher dettaglioUtenteDispatcher = req.getRequestDispatcher("dettaglioutente.jsp");
+		final RequestDispatcher utentiDispatcher = req.getRequestDispatcher("utenti.jsp");
+		final int id = Integer.parseInt(req.getParameter("idUtente"));
 		
-		final int id;
-		final String nome, cognome, mail, password;
-		final boolean admin;
-		
-		id = Integer.parseInt(req.getParameter("id"));
-		nome = req.getParameter("nuovoNome");
-		cognome = req.getParameter("nuovoCognome");
-		mail = req.getParameter("nuovaMail");
-		password = req.getParameter("password");
-		admin = Boolean.parseBoolean(req.getParameter("nuovoAdmin"));
-		
-		if (nome.isBlank() || cognome.isBlank() || mail.isBlank())
+		if (req.getParameter("tipo").equals("modifica"))
 		{
-			req.setAttribute("errore", "Tutti i campi devono essere compilati prima di poter salvare le modifche!");
-			error.forward(req, resp);
+			final String nome, cognome, mail, password;
+			final boolean admin;
+			
+			nome = req.getParameter("nuovoNome");
+			cognome = req.getParameter("nuovoCognome");
+			mail = req.getParameter("nuovaMail");
+			password = req.getParameter("password");
+			admin = Boolean.parseBoolean(req.getParameter("nuovoAdmin"));
+			
+			if (nome.isBlank() || cognome.isBlank() || mail.isBlank())
+			{
+				req.setAttribute("errore", "Tutti i campi devono essere compilati prima di poter salvare le modifche!");
+				error.forward(req, resp);
+			}
+			else
+			{
+				AdminDAO.doModificaUtente(id, nome, cognome, mail, password, admin);
+				req.setAttribute("utente",UtenteDAO.doRetrieveByID(id));
+				dettaglioUtenteDispatcher.forward(req, resp);
+			}
 		}
-		else
+		else if (req.getParameter("tipo").equals("cancella"))
 		{
-			AdminDAO.doModificaUtente(id, nome, cognome, mail, password, admin);
+			AdminDAO.doCancella(id,true);
+			final var ctx = req.getServletContext();
+			ctx.setAttribute("listaUtenti", UtenteDAO.doRetrieveAll());
+			
 			req.setAttribute("utente",UtenteDAO.doRetrieveByID(id));
-			ok.forward(req, resp);
+			utentiDispatcher.forward(req,resp);
 		}
 		
 	}
+	
+	
+	
 }

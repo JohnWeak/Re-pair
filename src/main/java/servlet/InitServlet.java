@@ -34,4 +34,5 @@ public class InitServlet implements ServletContextListener
 		context.setAttribute("listaAdmin",listaAdmin);
 		context.setAttribute("gmailer",gmailer);
 	}
+	
 }

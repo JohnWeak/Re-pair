@@ -46,7 +46,7 @@ public abstract class AdminDAO
 			ps.setString(4, password);
 			ps.setBoolean(4, admin);
 			
-			ps.executeQuery();
+			ps.executeUpdate();
 		}catch (Exception e) { e.printStackTrace(); }
 	}
 	
@@ -62,7 +62,6 @@ public abstract class AdminDAO
 			ps.setString(4, password);
 			ps.setBoolean(5,admin);
 			ps.setInt(6, id);
-			
 			
 			ps.executeUpdate();
 		}catch (Exception e) { e.printStackTrace(); }
@@ -84,7 +83,7 @@ public abstract class AdminDAO
 			}
 			
 			ps.setInt(1, id);
-			ps.executeQuery();
+			ps.executeUpdate();
 			
 		}catch (Exception e) { e.printStackTrace(); }
 	}
@@ -99,7 +98,7 @@ public abstract class AdminDAO
 			ps.setString(2, modello);
 			ps.setInt(3, costo);
 			
-			ps.executeQuery();
+			ps.executeUpdate();
 		}catch (Exception e) { e.printStackTrace(); }
 	}
 	

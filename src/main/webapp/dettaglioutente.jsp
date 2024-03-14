@@ -36,7 +36,8 @@
               <td><input type="text" name="nuovaMail" placeholder=${utente.mail} /></td>
               <td><input type="checkbox" name="nuovoAdmin" <%if (utente.isAdmin()){%>checked<%}%> /></td>
               <input type="hidden" name="password" value="${utente.password}" />
-              <input type="hidden" name="id" value="${utente.id}" />
+              <input type="hidden" name="idUtente" value="${utente.id}" />
+              <input type="hidden" name="tipo" value="modifica">
               <td><input type="submit" value="Conferma Modifiche" /></td>
             </form>
         </tr>

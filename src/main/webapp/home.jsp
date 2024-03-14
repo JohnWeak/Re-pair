@@ -47,11 +47,14 @@
       <div class="form-item log-in">
         <div class="table">
           <div class="table-cell">
-            <input name="mail" placeholder="Mail" type="email" />
-            <input name="password" placeholder="Password" type="password" />
+            <form action="login">
+              <input name="mail" placeholder="Mail" type="email" />
+              <input name="password" placeholder="Password" type="password" />
+              <input type="submit" value="Login"> <!--Necessario per inviare la richiesta alla servlet-->
             <div class="btn" id="loginButton">
               Log in
             </div>
+            </form>
           </div>
         </div>
       </div>

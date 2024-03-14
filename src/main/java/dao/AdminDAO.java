@@ -1,5 +1,3 @@
-
-
 package dao;
 
 import pojo.Admin;

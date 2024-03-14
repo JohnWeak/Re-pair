@@ -29,7 +29,15 @@ public class Riparazione
 	}
 	public String getStatus()
 	{
-		return status;
+		String str;
+		switch (status)
+		{
+			case "RIPARAZIONE_IN_CORSO": str="Riparazione in corso"; break;
+			case "RIPARAZIONE_CONCLUSA": str="Riparazione conclusa"; break;
+			case "PRODOTTO_RITIRATO_DAL_CLIENTE": str= "Prodotto ritirato dal cliente"; break;
+			default: str="---";
+		}
+		return str;
 	}
 	public int getId()
 	{

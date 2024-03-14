@@ -55,8 +55,7 @@ public class GestioneUtente extends HttpServlet
 		else if (req.getParameter("tipo").equals("cancella"))
 		{
 			AdminDAO.doCancella(id,true);
-			final var ctx = req.getServletContext();
-			ctx.setAttribute("listaUtenti", UtenteDAO.doRetrieveAll());
+			req.getServletContext().setAttribute("listaUtenti", UtenteDAO.doRetrieveAll());
 			
 			req.setAttribute("utente",UtenteDAO.doRetrieveByID(id));
 			utentiDispatcher.forward(req,resp);

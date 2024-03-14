@@ -29,6 +29,7 @@ public abstract class RiparazioneDAO
 				riparazione.setNota(result.getString(5));
 				riparazione.setCosto(result.getInt(6));
 				riparazione.setAssegnato(result.getInt(7));
+				riparazione.setMailCliente(result.getString(8));
 				list.add(riparazione);
 			}
 			
@@ -92,31 +93,25 @@ public abstract class RiparazioneDAO
 		return r;*/
 	}
 	
-	public static boolean doEdit(int id, String marca, String modello, String status, String nota, int costo)
+	public static void doEdit(int id, String marca, String modello, String status, String nota, int costo)
 	{
-		boolean success = true;
 		if (doRetrieveByID(id) != null)
 		{
 			try
 			{
 				final Connection c = ConPool.getConnection();
-				final PreparedStatement ps = c.prepareStatement("UPDATE riparazioni SET marca = ?, modello = ?, status=?, nota = ?, costo = ? WHERE id=?");
+				final PreparedStatement ps = c.prepareStatement("UPDATE riparazioni SET marca=?, modello=?, status=?, nota=?, costo=? WHERE id=?");
 				ps.setString(1, marca);
 				ps.setString(2, modello);
 				ps.setString(3,status);
 				ps.setString(4, nota);
-				ps.setInt(4, costo);
-				ps.setInt(5,id);
+				ps.setInt(5, costo);
+				ps.setInt(6,id);
 				ps.executeUpdate();
 				
 			} catch (Exception e) {}
+			
 		}
-		else
-		{
-			success = false;
-		}
-		
-		return success;
 	}
 	
 }

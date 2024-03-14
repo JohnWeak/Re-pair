@@ -27,7 +27,6 @@ public class Login extends HttpServlet
 		final RequestDispatcher lavoriDispatcher = request.getRequestDispatcher(lavoriPage);
 		
 		final HttpSession session = request.getSession();
-		response.setContentType("text/html");
 		
 		final String mail = request.getParameter("mail");
 		final String password = request.getParameter("password");
@@ -43,7 +42,7 @@ public class Login extends HttpServlet
 			
 			if (utente == null)
 			{
-				request.setAttribute("errore","L'utente cercato non è presente nel database.");
+				request.setAttribute("errore","L'utente con queste credenziali non è presente nel database.");
 				errorDispatcher.forward(request,response);
 			}
 			else

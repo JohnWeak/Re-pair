@@ -22,6 +22,7 @@
         <th>Marca</th>
         <th>Modello</th>
         <th>Costo</th>
+        <th>Status</th>
         <th>Utente a cui è assegnato il lavoro</th>
       </tr>
     <%
@@ -37,10 +38,11 @@
           <td> <%=r.getMarca()%> </td>
           <td> <%=r.getModello()%> </td>
           <td> <%=r.getCosto()%>€ </td>
+          <td> <%=r.getStatus()%> </td>
           <td> <% if (assegnato != null){%> <%=assegnato.getNome()%> <%=assegnato.getCognome()%> <%}%></td>
           <td>
             <input type="hidden" name="id" value="<%=r.getId()%>">
-            <input type="submit" name="" value="Dettaglio Lavoro">
+            <input type="submit" name="" value="Modifica Riparazione">
           </td>
         </form>
       </tr>

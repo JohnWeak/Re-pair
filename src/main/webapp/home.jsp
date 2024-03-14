@@ -35,7 +35,7 @@
         <div class="table">
           <div class="table-cell">
             <p>Sono un cliente!</p>
-            <form action="risultati-ricerca-riparazione.jsp">
+            <form action="cerca-riparazione" method="post">
             <input type="search" placeholder="Ricerca la tua riparazione!!!" name="search" id="search-input">
               <div class="btn">
                 <button class="bottonericerca">Ricerca Qui</button>

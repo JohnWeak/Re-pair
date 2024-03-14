@@ -35,12 +35,12 @@
         <div class="table">
           <div class="table-cell">
             <p>Sono un cliente!</p>
-            <form action="cerca-riparazione">
-              <input type="search" placeholder="Ricerca la tua riparazione!!!" name="search" id="search-input">
+            <form action="risultati-ricerca-riparazione.jsp">
+            <input type="search" placeholder="Ricerca la tua riparazione!!!" name="search" id="search-input">
+              <div class="btn">
+                <button class="bottonericerca">Ricerca Qui</button>
+              </div>
             </form>
-            <div class="btn" id="cerca">
-              Ricerca Qui!
-            </div>
           </div>
         </div>
       </div>
@@ -49,12 +49,11 @@
       <div class="form-item log-in">
         <div class="table">
           <div class="table-cell">
-            <form action="login">
-              <input name="mail" placeholder="Mail" type="email" />
-              <input name="password" placeholder="Password" type="password" />
-              <input type="submit" value="Login"> <!--Necessario per inviare la richiesta alla servlet-->
-            <div class="btn" id="loginButton">
-              Log in
+            <form action="login" method="post">
+            <input name="mail" placeholder="Mail" type="email" required />
+            <input name="password" placeholder="Password" type="password" required/>
+            <div class="btn">
+              <button class="bottonericerca">Login</button>
             </div>
             </form>
           </div>

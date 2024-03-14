@@ -28,6 +28,7 @@ p {
     color: black;
 }
 
+
 .table-cell {
     display: table-cell;
     vertical-align: middle;
@@ -125,11 +126,6 @@ p {
 .container .container-forms .container-info .info-item p {
     font-size: 20px;
     margin: 20px;
-}
-
-.container .container-forms .container-info .info-item .btn {
-    background-color: transparent;
-    border: 1px solid #fff;
 }
 
 .container .container-forms .container-info .info-item .table-cell {
@@ -260,4 +256,10 @@ p {
 .container.active .container-forms .container-info .info-item {
     height: 0%;
     opacity: 0;
+}
+
+.bottonericerca {
+    background-color: #292929;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    color: white;
 }

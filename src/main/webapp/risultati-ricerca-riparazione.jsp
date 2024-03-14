@@ -34,5 +34,19 @@
         <%}
 		}
     %>
+
+<div class="logo">
+    <a><img src='https://i.postimg.cc/qhMSGsGS/1709739159071stxt4cdl-removebg-preview.png' border='0' alt='1709739159071stxt4cdl-removebg-preview'/></a>
+</div>
+
+<div class="search">
+    <input type="search" placeholder="Ricerca la tua riparazione!!!" name="search" id="search-input">
+</div>
+
+<div class="ricercaeffettuata">
+    <p>Ricerca Effettuata</p>
+</div>
+
+
   </body>
 </html>

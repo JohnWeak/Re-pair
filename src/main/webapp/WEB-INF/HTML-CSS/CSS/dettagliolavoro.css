@@ -1,0 +1,55 @@
+.logo {
+    position: fixed;
+    left: 75rem;
+}
+
+.titlelavoro {
+    text-align: center;
+    margin: 2rem;
+}
+
+.dettagli {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #c2c5cc;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+}
+
+
+textarea:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+.dettagli li {
+    display: block;
+    margin-left: 20px;
+}
+
+
+

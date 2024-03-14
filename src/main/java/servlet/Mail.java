@@ -20,11 +20,11 @@ public class Mail extends HttpServlet
 		final var subject = req.getParameter("oggetto");
 		final var text = req.getParameter("testo");
 		
-		final Gmailer gmailer = Gmailer.getInstance(address);
+		final Gmailer gmailer = Gmailer.getInstance();
 		try
 		{
 			if (gmailer != null)
-				gmailer.sendMail(subject,text);
+				gmailer.sendMail(address,subject,text);
 			
 		} catch (Exception e) { e.printStackTrace(); }
 		

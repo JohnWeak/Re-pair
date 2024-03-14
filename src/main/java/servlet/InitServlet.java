@@ -8,6 +8,7 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import pojo.Admin;
+import pojo.Gmailer;
 import pojo.Riparazione;
 import pojo.Utente;
 
@@ -25,10 +26,12 @@ public class InitServlet implements ServletContextListener
 		final ArrayList<Riparazione> listaRiparazioni = RiparazioneDAO.doRetrieveAll();
 		final ArrayList<Utente> listaUtenti = UtenteDAO.doRetrieveAll();
 		final ArrayList<Admin> listaAdmin = AdminDAO.doRetrieveAll();
+		final Gmailer gmailer = Gmailer.getInstance();
 		
 		context = sce.getServletContext();
 		context.setAttribute("listaRiparazioni", listaRiparazioni);
 		context.setAttribute("listaUtenti", listaUtenti);
 		context.setAttribute("listaAdmin",listaAdmin);
+		context.setAttribute("gmailer",gmailer);
 	}
 }

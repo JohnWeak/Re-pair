@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>pagina di test email, da cancellare</title>
 </head>
 <body>
     <form action="mail">
-        <input type="email" name="indirizzo_mail" placeholder="MAIL">
-        <input type="text" name="oggetto" placeholder="OGGETTO MAIL">
-        <input type="text" name="testo" placeholder="TESTO TESTO TESTO BLA BLA BLA">
-        <input type="submit">
+        <input type="email" name="indirizzo_mail" placeholder="MAIL"><br/>
+        <input type="text" name="oggetto" placeholder="OGGETTO MAIL"><br/>
+        <input type="text" name="testo" placeholder="TESTO TESTO TESTO BLA BLA BLA"><br/>
+        <input type="submit" value="INVIA MAIL CATTIVISSIMA">
     </form>
 
 </body>

@@ -31,27 +31,23 @@ public class Gmailer
 {
 	private static final String sender = "giovanni.f.liguori@gmail.com";
 	private final Gmail service;
-	private final InternetAddress SENDER, RECEIVER;
 	private static Gmailer instance = null;
 	
-	public static Gmailer getInstance(String receiver)
+	public static Gmailer getInstance()
 	{
 		try
 		{
 			if (instance == null)
 			{
-				instance = new Gmailer(receiver);
+				instance = new Gmailer();
 			}
 		}catch (Exception e) { e.printStackTrace(); }
 		
 		return instance;
 	}
 	
-	private Gmailer(String receiver) throws Exception
+	private Gmailer() throws Exception
 	{
-		SENDER = new InternetAddress(sender);
-		RECEIVER = new InternetAddress(receiver);
-		
 		final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 		final GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
 		service = new Gmail.Builder(httpTransport, jsonFactory, getCredentials(httpTransport, jsonFactory))
@@ -73,9 +69,13 @@ public class Gmailer
 		
 	} // fine getCredentials()
 	
-	public void sendMail(String subject, String message) throws Exception
+	public void sendMail(String receiver, String subject, String message) throws Exception
 	{
+		final InternetAddress SENDER, RECEIVER;
 		final String mail_subject, mail_body;
+		
+		SENDER = new InternetAddress(sender);
+		RECEIVER = new InternetAddress(receiver);
 		
 		mail_subject = subject.isBlank() ? "Oggetto vuoto" : subject;
 		mail_body = message.isBlank() ? "Errore: il corpo della mail è vuoto." : message;

@@ -32,16 +32,27 @@
 			{
                 final Utente assegnato = r.getAssegnato() <= 0 ? null : UtenteDAO.doRetrieveByID(r.getAssegnato());%>
       <tr>
-        <td> <%=r.getId()%> </td>
-        <td> <%=r.getMarca()%> </td>
-        <td> <%=r.getModello()%> </td>
-        <td> <%=r.getCosto()%>€ </td>
-        <td> <% if (assegnato != null){%> <%=assegnato.getNome()%> <%=assegnato.getCognome()%> <%}%></td>
+        <form action="dettaglio-riparazione">
+          <td> <%=r.getId()%> </td>
+          <td> <%=r.getMarca()%> </td>
+          <td> <%=r.getModello()%> </td>
+          <td> <%=r.getCosto()%>€ </td>
+          <td> <% if (assegnato != null){%> <%=assegnato.getNome()%> <%=assegnato.getCognome()%> <%}%></td>
+          <td>
+            <input type="hidden" name="id" value="<%=r.getId()%>">
+            <input type="submit" name="" value="Dettaglio Lavoro">
+          </td>
+        </form>
       </tr>
-            <%}
+            <%
+            }
         }
     %>
   </table>
 
+  <%if (utente.isAdmin())
+  {%>
+    <a href="utenti.jsp">Lista degli utenti</a>
+  <%}%>
   </body>
 </html>

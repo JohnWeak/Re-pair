@@ -1,3 +1,10 @@
+<%@ page import="pojo.Utente" %>
+<jsp:useBean id="riparazione" scope="request" type="pojo.Riparazione" />
+<%
+    final Utente utenteAssegnato = (Utente) request.getAttribute("assegnato");
+    if (utenteAssegnato != null){%>
+    <jsp:useBean id="assegnato" scope="request" type="pojo.Utente" />
+<%}%>
 <%--
   Created by IntelliJ IDEA.
   User: Cristina
@@ -16,7 +23,7 @@
 <div class="logo">
     <a href="/"><img src='https://i.postimg.cc/qhMSGsGS/1709739159071stxt4cdl-removebg-preview.png' border='0' alt='1709739159071stxt4cdl-removebg-preview'/></a>
 </div>
-
+<a href="lavori.jsp">&lt; Lista Riparazioni</a>
 <div class="titlelavoro">
     <h2>Nome Lavoro</h2>
 </div>
@@ -24,11 +31,13 @@
 <div class="table-dettagli">
     <div class="dettagli">
        <ul>
-           <il>・ID:</il><br>
-           <il>・Marca:</il><br>
-           <il>・Modello:</il><br>
-           <il>・Costo:</il><br>
-           <il>・Utente a cui è assegnato:</il>
+           <form action="gestione-riparazione">
+             <il>・ID: ${riparazione.id}</il><br>
+             <il>・Marca: ${riparazione.marca}</il><br>
+             <il>・Modello: ${riparazione.modello}</il><br>
+             <il>・Costo: ${riparazione.costo}€</il><br>
+             <il>・Utente a cui è assegnato: <%if (utenteAssegnato != null) {%> ${assegnato.nome} ${assegnato.cognome}<%}else{%>Nessuno.<%}%></il>
+           </form>
        </ul>
            <textarea id="nota" name="nota" rows="4" cols="50" placeholder="Scrivi qui la tua nota..."></textarea>
     </div>

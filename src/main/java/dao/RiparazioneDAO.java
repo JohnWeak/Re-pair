@@ -58,6 +58,18 @@ public abstract class RiparazioneDAO
 	
 	public static Riparazione doRetrieveByID(int id)
 	{
+		Riparazione toReturn = null;
+		final ArrayList<Riparazione> list = doRetrieveAll();
+		for (Riparazione r : list)
+		{
+			if (r.getId() == id)
+			{
+				toReturn = r;
+				break;
+			}
+		}
+		return toReturn;
+		/*
 		Riparazione r = null;
 		try
 		{
@@ -71,14 +83,16 @@ public abstract class RiparazioneDAO
 				r.setMarca(result.getString(2));
 				r.setModello(result.getString(3));
 				r.setStatus(result.getString(4));
-				r.setCosto(result.getInt(5));
+				r.setNota(result.getString(5));
+				r.setCosto(result.getInt(6));
+				r.setAssegnato(result.getInt(7));
 			}
 			
 		}catch (Exception e) {}
-		return r;
+		return r;*/
 	}
 	
-	public static boolean doEdit(int id, String marca, String modello, String nota, int costo)
+	public static boolean doEdit(int id, String marca, String modello, String status, String nota, int costo)
 	{
 		boolean success = true;
 		if (doRetrieveByID(id) != null)
@@ -86,10 +100,11 @@ public abstract class RiparazioneDAO
 			try
 			{
 				final Connection c = ConPool.getConnection();
-				final PreparedStatement ps = c.prepareStatement("UPDATE riparazioni SET marca = ?, modello = ?, nota = ?, costo = ? WHERE id=?");
+				final PreparedStatement ps = c.prepareStatement("UPDATE riparazioni SET marca = ?, modello = ?, status=?, nota = ?, costo = ? WHERE id=?");
 				ps.setString(1, marca);
 				ps.setString(2, modello);
-				ps.setString(3, nota);
+				ps.setString(3,status);
+				ps.setString(4, nota);
 				ps.setInt(4, costo);
 				ps.setInt(5,id);
 				ps.executeUpdate();

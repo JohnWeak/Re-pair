@@ -15,7 +15,7 @@
     <title>Re-pair</title>
   </head>
   <body>
-    <p>Ciao, ${utente.nome} ${utente.cognome}. <%if (utente.isAdmin()) {%> -- Sei un admin, me cojoni! <%}%></p>
+    <p>Ciao, ${utente.nome} ${utente.cognome}. <%if (utente.isAdmin()) {%> -- Sei un admin, me cojoni! <%}%></p><a href="logout">Logout</a>
     <table>
       <tr>
         <th>ID</th>

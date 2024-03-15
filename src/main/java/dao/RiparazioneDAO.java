@@ -33,14 +33,14 @@ public abstract class RiparazioneDAO
 				list.add(riparazione);
 			}
 			
-		}catch (Exception e) {}
+		}catch (Exception e) { e.printStackTrace(); }
 		
 		return list;
 	}
 	
 	public static void doSave(Riparazione r)
 	{
-		final String s = "INSERT INTO riparazioni (`marca`, `modello`, `status`, `nota`, `costo`,`assegnato`) VALUES(?,?,?,?,?,?);";
+		final String s = "INSERT INTO riparazioni (`marca`, `modello`, `status`, `nota`, `costo`, `assegnato`, `mailCliente`) VALUES (?,?,?,?,?,?,?);";
 		try
 		{
 			Connection con = ConPool.getConnection();
@@ -51,10 +51,11 @@ public abstract class RiparazioneDAO
 			ps.setString(4,r.getNota());
 			ps.setInt(5,r.getCosto());
 			ps.setInt(6,r.getAssegnato());
+			ps.setString(7,r.getMailCliente());
 			
-			ps.executeQuery();
+			ps.executeUpdate();
 			
-		}catch (Exception e) {}
+		}catch (Exception e) { e.printStackTrace(); }
 	}
 	
 	public static Riparazione doRetrieveByID(int id)
@@ -70,27 +71,6 @@ public abstract class RiparazioneDAO
 			}
 		}
 		return toReturn;
-		/*
-		Riparazione r = null;
-		try
-		{
-			final Connection c = ConPool.getConnection();
-			final PreparedStatement ps = c.prepareStatement("SELECT * FROM riparazioni WHERE id = ?");
-			ps.setInt(1,id);
-			final ResultSet result = ps.executeQuery();
-			if (result.next())
-			{
-				r = new Riparazione();
-				r.setMarca(result.getString(2));
-				r.setModello(result.getString(3));
-				r.setStatus(result.getString(4));
-				r.setNota(result.getString(5));
-				r.setCosto(result.getInt(6));
-				r.setAssegnato(result.getInt(7));
-			}
-			
-		}catch (Exception e) {}
-		return r;*/
 	}
 	
 	public static void doEdit(int id, String marca, String modello, String status, String nota, int costo)
@@ -109,7 +89,7 @@ public abstract class RiparazioneDAO
 				ps.setInt(6,id);
 				ps.executeUpdate();
 				
-			} catch (Exception e) {}
+			} catch (Exception e) { e.printStackTrace(); }
 			
 		}
 	}

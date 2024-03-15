@@ -3,6 +3,7 @@
 <%@ page import="pojo.Riparazione" %>
 <%@ page import="dao.UtenteDAO" %>
 <%@ page import="pojo.Utente" %>
+<%@ page import="pojo.Status" %>
 <%--
   Created by IntelliJ IDEA.
   User: Giovanni Liguori
@@ -15,7 +16,7 @@
     <title>Re-pair</title>
   </head>
   <body>
-    <p>Ciao, ${utente.nome} ${utente.cognome}. <%if (utente.isAdmin()) {%> -- Sei un admin, me cojoni! <%}%></p><a href="logout">Logout</a>
+    <p>Ciao, ${utente.nome} ${utente.cognome}. <%if (utente.isAdmin()) {%> -- Sei un admin, complimenti! <%}%></p><a href="logout">Logout</a>
     <table>
       <tr>
         <th>ID</th>
@@ -49,7 +50,39 @@
             <%
             }
         }
-    %>
+            %>
+      <table/><br/><br/>
+      <table>
+      <tr><td>--- Aggiungi una riparazione ---</td></tr>
+      <tr>
+        <td>Marca</td>
+        <td>Modello</td>
+        <td>Costo</td>
+        <td>Status</td>
+        <td>Mail Cliente</td>
+        <td>Nota</td>
+      </tr>
+      <form action="gestione-riparazione">
+      <tr>
+        <input type="hidden" name="id" value="-1" />
+        <td> <input type="text" name="marca" placeholder="Marca"> </td>
+        <td> <input type="text" name="modello" placeholder="Modello"> </td>
+        <td> <input type="number" name="costo" value="100" placeholder="Costo" min="10" max="900">€ </td>
+        <td>
+          <select name="status">
+            <option value="<%=Status.RIPARAZIONE_IN_CORSO.toString()%>">Riparazione in corso</option>
+            <option value="<%=Status.RIPARAZIONE_CONCLUSA.toString()%>">Riparazione conclusa</option>
+            <option value="<%=Status.PRODOTTO_RITIRATO_DAL_CLIENTE.toString()%>">Prodotto ritirato dal cliente</option>
+          </select>
+        </td>
+        <td><input type="email" name="mailCliente" placeholder="Mail Cliente"></td>
+        <td>
+          <textarea id="nota" name="nota" rows="4" cols="30" placeholder="Scrivi qui la tua nota..."></textarea>
+        </td>
+        <td><input type="submit" value="Aggiungi Riparazione"></td>
+      </tr>
+
+      </form>
   </table>
 
   <%if (utente.isAdmin())

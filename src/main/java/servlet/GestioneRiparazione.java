@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.RiparazioneDAO;
+import dao.UtenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,43 +26,92 @@ public class GestioneRiparazione extends HttpServlet
 	{
 		final RequestDispatcher error = req.getRequestDispatcher("error.jsp");
 		final RequestDispatcher lavori = req.getRequestDispatcher("lavori.jsp");
+		final RequestDispatcher dettaglioLavoro = req.getRequestDispatcher("dettagliolavoro.jsp");
 		
-		final int id, costo;
-		final String marca, modello, status, nota;
+		final int id, costo, status, assegnato, idUtente;
+		final String marca, modello, nota, tipo, mailCliente;
 		
-		id = Integer.parseInt(req.getParameter("id"));
-		marca = req.getParameter("marca");
-		modello = req.getParameter("modello");
-		status = req.getParameter("status");
-		nota = req.getParameter("nota");
-		costo = Integer.parseInt(req.getParameter("costo"));
-		
-		if(id > 0) // modifica riparazione
+		if ((tipo = req.getParameter("tipo")) != null)
 		{
-			RiparazioneDAO.doEdit(id,marca,modello,status,nota,costo);
-			req.getServletContext().setAttribute("listaRiparazioni",RiparazioneDAO.doRetrieveAll());
-			req.setAttribute("riparazione", RiparazioneDAO.doRetrieveByID(id));
+			id = Integer.parseInt(req.getParameter("id"));
 			
-			req.getRequestDispatcher("dettagliolavoro.jsp").forward(req,resp);
-		}
-		else // crea nuova riparazione
+			switch (tipo)
+			{
+				case "visualizza":
+				{
+					Riparazione r = RiparazioneDAO.doRetrieveByID(id);
+					req.setAttribute("riparazione", r);
+					dettaglioLavoro.forward(req, resp);
+					break;
+				}
+				case "modifica":
+					marca = req.getParameter("marca");
+					modello = req.getParameter("modello");
+					status = Integer.parseInt(req.getParameter("status"));
+					costo = Integer.parseInt(req.getParameter("costo"));
+					nota = req.getParameter("nota");
+					mailCliente = req.getParameter("mailCliente");
+					assegnato = Integer.parseInt(req.getParameter("assegnato"));
+					RiparazioneDAO.doEdit(id, marca, modello, status, nota, costo, assegnato, mailCliente);
+					req.getServletContext().setAttribute("listaRiparazioni", RiparazioneDAO.doRetrieveAll());
+					req.setAttribute("assegnato", UtenteDAO.doRetrieveByID(assegnato));
+					req.setAttribute("riparazione",RiparazioneDAO.doRetrieveByID(id));
+					
+					dettaglioLavoro.forward(req, resp);
+					
+					break;
+				case "assegna":
+				{
+					final Riparazione r = RiparazioneDAO.doRetrieveByID(id);
+					idUtente = Integer.parseInt(req.getParameter("idUtente"));
+					marca = r.getMarca();
+					modello = r.getModello();
+					status = Integer.parseInt(req.getParameter("status"));
+					costo = r.getCosto();
+					nota = r.getNota();
+					mailCliente = r.getMailCliente();
+					RiparazioneDAO.doEdit(id, marca, modello, status, nota, costo, idUtente, mailCliente);
+					req.getServletContext().setAttribute("listaRiparazioni", RiparazioneDAO.doRetrieveAll());
+					
+					lavori.forward(req, resp);
+					break;
+				}
+				case "crea":
+				{
+					marca = req.getParameter("marca");
+					modello = req.getParameter("modello");
+					status = Integer.parseInt(req.getParameter("status"));
+					costo = Integer.parseInt(req.getParameter("costo"));
+					nota = req.getParameter("nota");
+					mailCliente = req.getParameter("mailCliente");
+					
+					if (marca.isBlank() || modello.isBlank() || mailCliente.isBlank())
+					{
+						req.setAttribute("errore","I campi marca, modello e mail non possono essere vuoti");
+						error.forward(req,resp);
+					}
+					else
+					{
+						RiparazioneDAO.doSave(new Riparazione(marca, modello, status, costo, nota, mailCliente));
+						req.getServletContext().setAttribute("listaRiparazioni", RiparazioneDAO.doRetrieveAll());
+						
+						lavori.forward(req,resp);
+					}
+					break;
+				}
+			}
+			
+		}else
 		{
-			final String mailCliente = req.getParameter("mailCliente");
-			if(marca.isBlank() || modello.isBlank() || mailCliente.isBlank())
-			{
-				req.setAttribute("errore", "Marca, Modello e Mail Cliente devono essere compilati!");
-				error.forward(req,resp);
-			}
-			else
-			{
-				RiparazioneDAO.doSave(new Riparazione(marca,modello,status,costo,nota,mailCliente));
-				
-				req.getServletContext().setAttribute("listaRiparazioni",RiparazioneDAO.doRetrieveAll());
-				lavori.forward(req,resp);
-			}
-			
-			
+			req.setAttribute("errore","errore nella servlet");
+			error.forward(req,resp);
 		}
+		
+		
+		
+		
+		
+		
 		
 		
 		

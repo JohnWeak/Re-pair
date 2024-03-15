@@ -3,12 +3,12 @@ package pojo;
 /**@author Giovanni Liguori*/
 public class Riparazione
 {
-	private int id, costo, assegnato;
-	private String marca, modello, status, nota, mailCliente;
+	private int id, costo, status, assegnato;
+	private String marca, modello, nota, mailCliente;
 	
 	public Riparazione(){}
 	
-	public Riparazione(String marca, String modello, String status, int costo, String nota, String mailCliente)
+	public Riparazione(String marca, String modello, int status, int costo, String nota, String mailCliente)
 	{
 		this.marca = marca;
 		this.modello = modello;
@@ -27,17 +27,9 @@ public class Riparazione
 	{
 		return modello;
 	}
-	public String getStatus()
+	public int getStatus()
 	{
-		String str;
-		switch (status)
-		{
-			case "RIPARAZIONE_IN_CORSO": str="Riparazione in corso"; break;
-			case "RIPARAZIONE_CONCLUSA": str="Riparazione conclusa"; break;
-			case "PRODOTTO_RITIRATO_DAL_CLIENTE": str= "Prodotto ritirato dal cliente"; break;
-			default: str="---";
-		}
-		return str;
+		return status;
 	}
 	public int getId()
 	{
@@ -69,7 +61,7 @@ public class Riparazione
 	{
 		this.modello = modello;
 	}
-	public void setStatus(String status)
+	public void setStatus(int status)
 	{
 		this.status = status;
 	}

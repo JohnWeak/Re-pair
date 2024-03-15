@@ -3,7 +3,6 @@
 <%@ page import="pojo.Riparazione" %>
 <%@ page import="dao.UtenteDAO" %>
 <%@ page import="pojo.Utente" %>
-<%@ page import="pojo.Status" %>
 <%--
   Created by IntelliJ IDEA.
   User: Giovanni Liguori
@@ -11,6 +10,7 @@
   Time: 11:07
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%final String[] status = {"Riparazione in corso", "Riparazione conclusa", "Ritirato dal cliente"};%>
 <html>
   <head>
     <title>Re-pair</title>
@@ -34,18 +34,36 @@
 			{
                 final Utente assegnato = r.getAssegnato() <= 0 ? null : UtenteDAO.doRetrieveByID(r.getAssegnato());%>
       <tr>
-        <form action="dettaglio-riparazione">
           <td> <%=r.getId()%> </td>
           <td> <%=r.getMarca()%> </td>
           <td> <%=r.getModello()%> </td>
           <td> <%=r.getCosto()%>€ </td>
-          <td> <%=r.getStatus()%> </td>
-          <td> <% if (assegnato != null){%> <%=assegnato.getNome()%> <%=assegnato.getCognome()%> <%}%></td>
+          <td> <%=status[r.getStatus()]%> </td>
           <td>
-            <input type="hidden" name="id" value="<%=r.getId()%>">
-            <input type="submit" name="" value="Modifica Riparazione">
+            <% if (assegnato != null){%> <%=assegnato.getNome()%> <%=assegnato.getCognome()%> <%}else{%>
+            <%}%>
           </td>
-        </form>
+          <td>
+            <form action="dettaglio-riparazione">
+              <input type="submit" name="" value="Dettagli Riparazione">
+              <input type="hidden" name="tipo" value="visualizza">
+              <input type="hidden" name="id" value="<%=r.getId()%>">
+
+            </form>
+          </td>
+        <td>
+          <%if (assegnato == null)
+          {%>
+          <form action="gestione-riparazione">
+            <input type="submit" name="" value="Assegnati la riparazione" />
+            <input type="hidden" name="tipo" value="assegna" />
+            <input type="hidden" name="id" value="<%=r.getId()%>" />
+            <input type="hidden" name="status" value="<%=r.getStatus()%>" />
+            <input type="hidden" name="idUtente" value="${utente.id}" />
+          </form>
+          <%}%>
+        </td>
+
       </tr>
             <%
             }
@@ -65,14 +83,15 @@
       <form action="gestione-riparazione">
       <tr>
         <input type="hidden" name="id" value="-1" />
+        <input type="hidden" name="tipo" value="crea" />
         <td> <input type="text" name="marca" placeholder="Marca"> </td>
         <td> <input type="text" name="modello" placeholder="Modello"> </td>
         <td> <input type="number" name="costo" value="100" placeholder="Costo" min="10" max="900">€ </td>
         <td>
           <select name="status">
-            <option value="<%=Status.RIPARAZIONE_IN_CORSO.toString()%>">Riparazione in corso</option>
-            <option value="<%=Status.RIPARAZIONE_CONCLUSA.toString()%>">Riparazione conclusa</option>
-            <option value="<%=Status.PRODOTTO_RITIRATO_DAL_CLIENTE.toString()%>">Prodotto ritirato dal cliente</option>
+            <option value="0" selected>Riparazione in corso</option>
+            <option value="1">Riparazione conclusa</option>
+            <option value="2">Prodotto ritirato dal cliente</option>
           </select>
         </td>
         <td><input type="email" name="mailCliente" placeholder="Mail Cliente"></td>

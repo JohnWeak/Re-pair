@@ -1,5 +1,4 @@
 <%@ page import="pojo.Utente" %>
-<%@ page import="pojo.Status" %>
 <%@ page import="pojo.Cliente" %>
 <%@ page import="dao.ClienteDAO" %>
 <jsp:useBean id="riparazione" scope="request" type="pojo.Riparazione" />
@@ -42,17 +41,20 @@
           <il>・Cliente: <%if (c != null){%><%=c.getNome()%><%}%></il><br>
           <il>・Status:
             <select name="status">
-              <option value="<%=Status.RIPARAZIONE_IN_CORSO.toString()%>" <%if (riparazione.getStatus().equals("Riparazione in corso")) {%>selected<%}%>>Riparazione in corso</option>
-              <option value="<%=Status.RIPARAZIONE_CONCLUSA.toString()%>" <%if (riparazione.getStatus().equals("Riparazione conclusa")) {%>selected<%}%>>Riparazione conclusa</option>
-              <option value="<%=Status.PRODOTTO_RITIRATO_DAL_CLIENTE.toString()%>" <%if (riparazione.getStatus().equals("Prodotto ritirato dal cliente")) {%>selected<%}%>>Prodotto ritirato dal cliente</option>
+              <option value="0" <%if (riparazione.getStatus() == 0) {%>selected<%}%>>Riparazione in corso</option>
+              <option value="1" <%if (riparazione.getStatus() == 1) {%>selected<%}%>>Riparazione conclusa</option>
+              <option value="2" <%if (riparazione.getStatus() == 2)  {%>selected<%}%>>Prodotto ritirato dal cliente</option>
             </select>
           </il><br>
           <il>・Costo: <input type="number" name="costo" value="${riparazione.costo}" />€</il><br>
-          <il>・Utente a cui è assegnato: <%if (utenteAssegnato != null) {%> ${assegnato.nome} ${assegnato.cognome}<%}else{%>Nessuno.<%}%></il>
+          <il>・Utente a cui è assegnato: <%=utenteAssegnato == null ? "Nessuno" : utenteAssegnato.getNome() +" "+ utenteAssegnato.getCognome()%></il>
         </ul>
            <textarea id="nota" name="nota" rows="4" cols="50" placeholder="Scrivi qui la tua nota...">${riparazione.nota}</textarea>
             <input type="hidden" name="id" value="${riparazione.id}" />
-            <input type="submit" name="" value="Conferma Modifiche">
+            <input type="hidden" name="tipo" value="modifica" />
+            <input type="hidden" name="assegnato" value="${assegnato == null ? -1 : assegnato.id}" />
+            <input type="hidden" name="mailCliente" value="<%= c == null ? "" : c.getMail() %>" />
+            <input type="submit" name="" value="Conferma Modifiche" />
         </form>
     </div>
 </div>

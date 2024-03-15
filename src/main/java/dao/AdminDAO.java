@@ -44,7 +44,7 @@ public abstract class AdminDAO
 			ps.setString(2, cognome);
 			ps.setString(3, mail);
 			ps.setString(4, password);
-			ps.setBoolean(4, admin);
+			ps.setBoolean(5, admin);
 			
 			ps.executeUpdate();
 		}catch (Exception e) { e.printStackTrace(); }

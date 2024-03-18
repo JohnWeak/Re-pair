@@ -26,7 +26,11 @@
 <div class="logo">
     <a href="/"><img src='https://i.postimg.cc/qhMSGsGS/1709739159071stxt4cdl-removebg-preview.png' border='0' alt='1709739159071stxt4cdl-removebg-preview'/></a>
 </div>
-<a href="lavori.jsp">&lt; Lista Riparazioni</a>
+
+<div class="listalavori">
+<a href="lavori.jsp"><img src='https://i.postimg.cc/9RdjQBTs/list.png' border='0' alt='list' width="60px" height="60px"/></a>
+</div>
+
 <div class="titlelavoro">
     <h2>Nome Lavoro</h2>
 </div>

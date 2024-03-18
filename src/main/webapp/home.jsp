@@ -49,7 +49,7 @@
       <div class="form-item log-in">
         <div class="table">
           <div class="table-cell">
-            <form action="login" method="post">
+            <form action="login" method="get">
             <input name="mail" placeholder="Mail" type="email" required />
             <input name="password" placeholder="Password" type="password" required/>
             <div class="btn">

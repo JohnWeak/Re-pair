@@ -51,7 +51,7 @@ public class CercaRiparazione extends HttpServlet
 					break;
 				}
 			}
-			req.setAttribute("errore", "L'ID cercato non corrisponde ad alcuna riparazione.");
+			req.setAttribute("errore", "L'ID cercato non corrisponde <br> ad alcuna riparazione.");
 			errorDispatcher.forward(req,resp);
 			
 		}

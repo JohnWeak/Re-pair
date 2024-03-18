@@ -44,7 +44,7 @@ public class GestioneUtente extends HttpServlet
 			
 			if (nome.isBlank() || cognome.isBlank() || mail.isBlank())
 			{
-				req.setAttribute("errore", "Tutti i campi devono essere compilati prima di poter salvare le modifche!");
+				req.setAttribute("errore", "Tutti i campi devono essere compilati <br> prima di poter salvare le modifche!");
 				error.forward(req, resp);
 			}
 			else
@@ -74,7 +74,7 @@ public class GestioneUtente extends HttpServlet
 			
 			if (nome.isBlank() || cognome.isBlank() || mail.isBlank() || password.isBlank())
 			{
-				req.setAttribute("errore", "Tutti i campi devono essere compilati prima di poter salvare le modifche!");
+				req.setAttribute("errore", "Tutti i campi devono essere compilati <br> prima di poter salvare le modifche!");
 				error.forward(req, resp);
 			}
 			else

@@ -42,7 +42,7 @@ public class Login extends HttpServlet
 			
 			if (utente == null)
 			{
-				request.setAttribute("errore","L'utente con queste credenziali non è presente nel database.");
+				request.setAttribute("errore","L'utente con queste credenziali <br> non è presente nel database.");
 				errorDispatcher.forward(request,response);
 			}
 			else

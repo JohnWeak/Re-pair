@@ -1,57 +1,54 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="pojo.Riparazione" %>
+<%@ page import="dao.UtenteDAO" %>
+<%@ page import="pojo.Utente" %>
 <%@ page import="pojo.Riparazione" %>
 <%@ page import="java.util.ArrayList" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Giovanni Liguori
-  Date: 07/03/24
-  Time: 11:42
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%final String[] status = {"Riparazione in corso", "Riparazione conclusa", "Ritirato dal cliente"};%>
 <html>
-  <head>
-      <%
-          char lettera = 'i';
-          final ArrayList<Riparazione> listaRiparazioni = (ArrayList<Riparazione>) request.getServletContext().getAttribute("listaRiparazioni");
-		  final String ricerca = request.getParameter("search");
-		  if (listaRiparazioni != null)
-		  {
-			  if (listaRiparazioni.size() == 1)
-				  lettera = 'e';
-            %><title><%=listaRiparazioni.size()%> Riparazion<%=lettera%></title>
-          <%}
-      %>
-  </head>
-  <body>
-    <%
-        if (listaRiparazioni != null)
-        {
-			for (Riparazione r : listaRiparazioni)
-		    {
-			    if (r.getId() == Integer.parseInt(ricerca))
-                {
-        %>
-        <div>
-            <%=r.getId()%> - <%=r.getMarca()%> <%=r.getModello()%>
-        </div>
-            <%}%>
-        <%}
-		}
-    %>
+
+<style><%@include file="WEB-INF/HTML-CSS/CSS/lavori.css"%></style>
+
+<head>
+    <body bgcolor="708090">
 
 <div class="logo">
     <a><img src='https://i.postimg.cc/qhMSGsGS/1709739159071stxt4cdl-removebg-preview.png' border='0' alt='1709739159071stxt4cdl-removebg-preview'/></a>
 </div>
 
-    <form action="cerca-riparazione">
-<div class="search">
-    <input type="search" placeholder="Ricerca la tua riparazione!!!" name="search" id="search-input">
-</div>
-    </form>
+      <%
+          final ArrayList<Riparazione> lista = (ArrayList<Riparazione>) request.getAttribute("riparazioni");
+          if (lista != null)
+          {
+              for (Riparazione r : lista)
+              {
+                  final Utente assegnato = r.getAssegnato() <= 0 ? null : UtenteDAO.doRetrieveByID(r.getAssegnato());%>
 
-<div class="ricercaeffettuata">
-    <p>Ricerca Effettuata</p>
-</div>
+      <div class="container">
+          <div class="card" style="--clr: #292929">
+              <div class="img-box">
+                  <a><img src='https://i.postimg.cc/YG41NLDr/support.png'/></a>
+              </div>
+              <div class="content">
+                  <h2><%=r.getModello()%></h2>
+                  <p> <br>
+                      ID: <%=r.getId()%> <br>
+                      MARCA: <%=r.getMarca()%> <br>
+                      COSTO: <%=r.getCosto()%>€ <br>
+                      STATUS: <%=status[r.getStatus()]%> <br>
+                      ASSEGNATO: <% if (assegnato != null){%> <%=assegnato.getNome()%> <%=assegnato.getCognome()%> <%}else{%>NON ASSEGNATO
+                      <%}%>
+                  </p>
 
+              </div>
+          </div>
+      </div>
+      <%}%>
 
-  </body>
+      <%}%>
+
+    </body>
+  </head>
 </html>

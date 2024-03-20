@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.RiparazioneDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,15 +31,18 @@ public class CercaRiparazione extends HttpServlet
 		final RequestDispatcher errorDispatcher = req.getRequestDispatcher(errorPage);
 		
 		final String workID = req.getParameter("search");
-		resp.setContentType("text/html");
+		//resp.setContentType("text/html");
 		
 		if (workID == null || workID.isBlank())
 		{
 			req.setAttribute("errore", "l'ID del lavoro non può essere vuoto.");
+			req.setAttribute("errore", "L'ID cercato non corrisponde <br> ad alcuna riparazione.");
 			errorDispatcher.forward(req,resp);
 		}
-		else
-		{
+		else {
+			req.setAttribute("riparazioni", RiparazioneDAO.doRetrieveCustomerRiparazioni(workID));
+
+			/*
 			final ArrayList<Riparazione> listaRiparazioni = (ArrayList<Riparazione>) getServletContext().getAttribute("listaRiparazioni");
 			
 			final int id = Integer.parseInt(workID);
@@ -47,14 +51,13 @@ public class CercaRiparazione extends HttpServlet
 				if (r.getId() == id)
 				{
 					req.setAttribute("riparazione", r);
-					searchDispatcher.forward(req, resp);
+
 					break;
 				}
-			}
-			req.setAttribute("errore", "L'ID cercato non corrisponde <br> ad alcuna riparazione.");
-			errorDispatcher.forward(req,resp);
-			
+			}*/
+			searchDispatcher.forward(req, resp);
+		}
 		}
 		
 	}
-}
+

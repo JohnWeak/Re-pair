@@ -36,7 +36,7 @@
           <div class="table-cell">
             <p>Sono un cliente!</p>
             <form action="cerca-riparazione" method="post">
-            <input type="search" placeholder="Ricerca la tua riparazione!!!" name="search" id="search-input">
+            <input type="email" placeholder="Inserisci la tua mail" name="search" >
               <div class="btn">
                 <button class="bottonericerca">Ricerca Qui</button>
               </div>

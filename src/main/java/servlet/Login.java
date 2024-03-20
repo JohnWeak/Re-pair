@@ -52,6 +52,7 @@ public class Login extends HttpServlet
 			else
 			{
 				session.setAttribute("riparazioni",RiparazioneDAO.doRetrieveAll());
+				session.setAttribute("riparazioni",RiparazioneDAO.doRetrieveAll());
 				session.setAttribute("utente", utente);
 				lavoriDispatcher.forward(request, response);
 			}

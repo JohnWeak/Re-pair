@@ -95,5 +95,36 @@ public abstract class RiparazioneDAO
 			
 		}
 	}
+
+
+	public static ArrayList<Riparazione> doRetrieveCustomerRiparazioni(String email)
+	{
+		Riparazione riparazione;
+		ArrayList<Riparazione> list = new ArrayList<>();
+		try
+		{
+			final Connection c = ConPool.getConnection();
+			final PreparedStatement ps = c.prepareStatement("SELECT * FROM riparazioni WHERE mailCliente=?");
+			ps.setString(1,email);
+			final ResultSet result = ps.executeQuery();
+
+			while (result.next())
+			{
+				riparazione = new Riparazione();
+				riparazione.setId(result.getInt(1));
+				riparazione.setMarca(result.getString(2));
+				riparazione.setModello(result.getString(3));
+				riparazione.setStatus(result.getInt(4));
+				riparazione.setNota(result.getString(5));
+				riparazione.setCosto(result.getInt(6));
+				riparazione.setAssegnato(result.getInt(7));
+				riparazione.setMailCliente(result.getString(8));
+				list.add(riparazione);
+			}
+
+		}catch (Exception e) { e.printStackTrace(); }
+
+		return list;
+	}
 	
 }

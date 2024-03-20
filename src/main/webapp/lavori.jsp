@@ -83,38 +83,26 @@
 
 <footer>
     <h3>AGGIUNGI UNA RIPARAZIONE</h3>
-    <tr>
-      <td>Marca</td>
-      <td>Modello</td>
-      <td>Costo</td>
-      <td>Status</td>
-    </tr>
-
-    <tr>
-      <td>Mail Cliente</td>
-      <td>Nota</td>
-    </tr>
 
   <form action="gestione-riparazione">
-    <tr>
+
       <input type="hidden" name="id" value="-1" />
       <input type="hidden" name="tipo" value="crea" />
-      <td> <input type="text" name="marca" placeholder="Marca"> </td>
-      <td> <input type="text" name="modello" placeholder="Modello"> </td>
-      <td> <input type="number" name="costo" value="100" placeholder="Costo" min="10" max="900">€ </td>
-      <td>
+      <input type="text" name="marca" placeholder="Marca">
+      <input type="text" name="modello" placeholder="Modello">
+      <input type="number" name="costo" value="100" placeholder="Costo" min="10" max="900">€
+
         <select name="status">
           <option value="0" selected>Riparazione in corso</option>
           <option value="1">Riparazione conclusa</option>
           <option value="2">Prodotto ritirato dal cliente</option>
         </select>
-      </td>
-      <td><input type="email" name="mailCliente" placeholder="Mail Cliente"></td>
-      <td>
+
+      <input type="email" name="mailCliente" placeholder="Mail Cliente">
+
         <textarea id="nota" name="nota" rows="4" cols="30" placeholder="Scrivi qui la tua nota..."></textarea>
-      </td>
-      <td><input type="submit" value="Aggiungi Riparazione"></td>
-    </tr>
+
+      <input type="submit" value="Aggiungi Riparazione">
   </form>
 </footer>
 

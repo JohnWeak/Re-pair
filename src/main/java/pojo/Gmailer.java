@@ -15,21 +15,20 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
 import com.google.common.escape.Escaper;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Set;
 
 public class Gmailer
 {
-	private static final String sender = "giolig@duck.com";
+	private static final String sender = "giovanni.f.liguori@gmail.com";
 	// private final String mailRePair = "mail@repair.com";
 	private final Gmail service;
 	private static Gmailer instance = null;
@@ -52,34 +51,39 @@ public class Gmailer
 		final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 		final GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
 		service = new Gmail.Builder(httpTransport, jsonFactory, getCredentials(httpTransport, jsonFactory))
-				.setApplicationName("Mail Tester")
+				.setApplicationName("Mailer")
 				.build();
 	}
 	
 	private static Credential getCredentials(final NetHttpTransport httpTransport, GsonFactory jsonFactory) throws IOException
 	{
-		final GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory,new InputStreamReader(Gmailer.class.getResourceAsStream("/secrets.json")));
-		final GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-				httpTransport, jsonFactory, clientSecrets, Set.of(GmailScopes.GMAIL_SEND))
-				.setDataStoreFactory(new FileDataStoreFactory(Paths.get("tokens").toFile()))
-				.setAccessType("offline")
-				.build();
-		
-		final LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-		return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
-		
+		final String secretPath = "/secrets.json";
+		try
+		{
+			final InputStream secretFile = Gmailer.class.getResourceAsStream(secretPath);
+			final GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(secretFile));
+			final GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+					httpTransport, jsonFactory, clientSecrets, Set.of(GmailScopes.GMAIL_SEND))
+					.setDataStoreFactory(new FileDataStoreFactory(Paths.get("/Users/giovanni/IdeaProjects/Re-pair/tokens").toFile()))
+					.setAccessType("offline")
+					.build();
+			
+			final LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+			return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+		}catch (Exception e) { e.printStackTrace(); }
+		return null;
 	} // fine getCredentials()
 	
 	public void sendMail(String receiver, String subject, String message) throws Exception
 	{
 		final InternetAddress SENDER, RECEIVER;
-		final String mail_subject, mail_body;
+		final String mail_subject, mail_body, oggettoVuoto = "Oggetto vuoto", corpoVuoto = "Il corpo della mail è vuoto.";
 		
 		SENDER = new InternetAddress(sender);
 		RECEIVER = new InternetAddress(receiver);
 		
-		mail_subject = subject.isBlank() ? "Oggetto vuoto" : subject;
-		mail_body = message.isBlank() ? "Errore: il corpo della mail è vuoto." : message;
+		mail_subject = subject.isBlank() ? oggettoVuoto : subject;
+		mail_body = message.isBlank() ? corpoVuoto : message;
 		
 		// Creazione messaggio MIME
 		final Properties props = new Properties();
@@ -101,6 +105,9 @@ public class Gmailer
 		try
 		{
 			service.users().messages().send("me",msg).execute();
+			
+			System.out.println(mail_subject);
+			System.out.println(mail_body);
 		}catch (GoogleJsonResponseException e)
 		{
 			GoogleJsonError error = e.getDetails();

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import pojo.Riparazione;
+import pojo.RiparazioneConclusa;
 
 import java.io.IOException;
 
@@ -55,10 +56,16 @@ public class GestioneRiparazione extends HttpServlet
 					RiparazioneDAO.doEdit(id, marca, modello, status, nota, costo, assegnato, mailCliente);
 					req.getServletContext().setAttribute("listaRiparazioni", RiparazioneDAO.doRetrieveAll());
 					req.setAttribute("assegnato", UtenteDAO.doRetrieveByID(assegnato));
-					req.setAttribute("riparazione",RiparazioneDAO.doRetrieveByID(id));
+					Riparazione riparazione = RiparazioneDAO.doRetrieveByID(id);
+					req.setAttribute("riparazione",riparazione);
+					
+					// 0 : in riparazione, 1 : conclusa, 2: ritirato dal cliente
+					if (status > 0) // riparazione conclusa
+					{
+						new RiparazioneConclusa(riparazione);
+					}
 					
 					dettaglioLavoro.forward(req, resp);
-					
 					break;
 				case "assegna":
 				{

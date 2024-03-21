@@ -30,34 +30,21 @@ public class CercaRiparazione extends HttpServlet
 		final RequestDispatcher searchDispatcher = req.getRequestDispatcher(workSearchPage);
 		final RequestDispatcher errorDispatcher = req.getRequestDispatcher(errorPage);
 		
-		final String workID = req.getParameter("search");
-		//resp.setContentType("text/html");
+		final String mailCliente = req.getParameter("search");
 		
-		if (workID == null || workID.isBlank())
+		if (mailCliente == null || mailCliente.isBlank())
 		{
-			req.setAttribute("errore", "l'ID del lavoro non può essere vuoto.");
-			req.setAttribute("errore", "L'ID cercato non corrisponde <br> ad alcuna riparazione.");
+			req.setAttribute("errore", "Il campo mail <br> non può essere vuoto.");
 			errorDispatcher.forward(req,resp);
 		}
-		else {
-			req.setAttribute("riparazioni", RiparazioneDAO.doRetrieveCustomerRiparazioni(workID));
-
-			/*
-			final ArrayList<Riparazione> listaRiparazioni = (ArrayList<Riparazione>) getServletContext().getAttribute("listaRiparazioni");
+		else
+		{
+			final ArrayList<Riparazione> list = RiparazioneDAO.doRetrieveCustomerRiparazioni(mailCliente);
+			req.setAttribute("riparazioni", list);
 			
-			final int id = Integer.parseInt(workID);
-			for (Riparazione r : listaRiparazioni)
-			{
-				if (r.getId() == id)
-				{
-					req.setAttribute("riparazione", r);
-
-					break;
-				}
-			}*/
 			searchDispatcher.forward(req, resp);
 		}
-		}
-		
 	}
+		
+}
 

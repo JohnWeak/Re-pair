@@ -29,7 +29,8 @@ import java.util.Set;
 
 public class Gmailer
 {
-	private static final String sender = "giovanni.f.liguori@gmail.com";
+	private static final String sender = "giolig@duck.com";
+	// private final String mailRePair = "mail@repair.com";
 	private final Gmail service;
 	private static Gmailer instance = null;
 	
@@ -99,9 +100,7 @@ public class Gmailer
 		
 		try
 		{
-			msg = service.users().messages().send("me",msg).execute();
-			// System.out.printf("Message id: %s\n",msg.getId());
-			// System.out.println(msg.toPrettyString());
+			service.users().messages().send("me",msg).execute();
 		}catch (GoogleJsonResponseException e)
 		{
 			GoogleJsonError error = e.getDetails();

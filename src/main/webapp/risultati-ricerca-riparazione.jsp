@@ -6,7 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%final String[] status = {"Riparazione in corso", "Riparazione conclusa", "Ritirato dal cliente"};%>
+<%final String[] status = {"Riparazione in corso", "Riparazione conclusa", "Ritirato dal cliente", "Archiviato"};%>
 <html>
 
 <style><%@include file="WEB-INF/HTML-CSS/CSS/lavori.css"%></style>

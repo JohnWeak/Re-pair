@@ -45,14 +45,11 @@ public class Login extends HttpServlet
 			
 			if (utente == null)
 			{
-				session.setAttribute("riparazioni",RiparazioneDAO.doRetrieveAll());
 				request.setAttribute("errore","L'utente con queste credenziali <br> non è presente nel database.");
 				errorDispatcher.forward(request,response);
 			}
 			else
 			{
-				session.setAttribute("riparazioni",RiparazioneDAO.doRetrieveAll());
-				session.setAttribute("riparazioni",RiparazioneDAO.doRetrieveAll());
 				session.setAttribute("utente", utente);
 				lavoriDispatcher.forward(request, response);
 			}

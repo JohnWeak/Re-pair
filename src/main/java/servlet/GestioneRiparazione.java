@@ -31,6 +31,8 @@ public class GestioneRiparazione extends HttpServlet
 		
 		final int id, costo, status, assegnato, idUtente;
 		final String marca, modello, nota, tipo, mailCliente;
+		final String campiVuoti = "I campi marca, modello, mail e costo non possono essere vuoti";
+		
 		
 		if ((tipo = req.getParameter("tipo")) != null)
 		{
@@ -88,17 +90,20 @@ public class GestioneRiparazione extends HttpServlet
 					marca = req.getParameter("marca");
 					modello = req.getParameter("modello");
 					status = Integer.parseInt(req.getParameter("status"));
-					costo = Integer.parseInt(req.getParameter("costo"));
-					nota = req.getParameter("nota");
 					mailCliente = req.getParameter("mailCliente");
+					nota = req.getParameter("nota");
 					
-					if (marca.isBlank() || modello.isBlank() || mailCliente.isBlank())
+					if (req.getParameter("costo") == null || marca.isBlank() || modello.isBlank() || mailCliente.isBlank())
 					{
-						req.setAttribute("errore","I campi marca, modello e mail non possono essere vuoti");
+						req.setAttribute("errore",campiVuoti);
 						error.forward(req,resp);
+						return;
 					}
 					else
 					{
+						costo = Integer.parseInt(req.getParameter("costo"));
+						
+					
 						RiparazioneDAO.doSave(new Riparazione(marca, modello, status, costo, nota, mailCliente));
 						req.getServletContext().setAttribute("listaRiparazioni", RiparazioneDAO.doRetrieveAll());
 						

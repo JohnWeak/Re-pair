@@ -1,9 +1,16 @@
-.gestioneutenti {
+.ancora {
     position: absolute;
     display: block;
     left: 75rem;
     margin-top: -130px;
     margin-left: 95px;
+}
+.gestioneutenti {
+    position: absolute;
+    display: block;
+    left: 65rem;
+    margin-top: -130px;
+    margin-left: 155px;
 }
 
 .logout {

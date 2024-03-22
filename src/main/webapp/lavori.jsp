@@ -20,10 +20,14 @@
     <a><img src='https://i.postimg.cc/qhMSGsGS/1709739159071stxt4cdl-removebg-preview.png' border='0' alt='1709739159071stxt4cdl-removebg-preview'/></a>
 </div>
 
+<div class="ancora">
+<a href="#aggiungi"><img src='https://i.postimg.cc/3kZTwg0H/plus.png' border='0' alt='plus' width="60px" height="60px"/></a>
+</div>
+
 <div class="gestioneutenti">
   <%if (utente.isAdmin())
   {%>
-  <a href="utenti.jsp"><img src='https://i.postimg.cc/Hc1Sn9sD/user.png' border='0' alt='user' width="60px" height="60px"/></a>
+  <a href="utenti.jsp"><img src='https://i.postimg.cc/WbGcVjzv/user.png' border='0' alt='user' width="60px" height="60px"/></a>
   <%}%>
 </div>
 
@@ -81,29 +85,33 @@
 <%}%>
 
 
-<footer>
+<footer id="aggiungi" class="footer-reparazione">
+  <div class="footer-container">
     <h3>AGGIUNGI UNA RIPARAZIONE</h3>
 
-  <form action="gestione-riparazione">
+    <form action="gestione-riparazione" class="form-reparazione">
+      <div class="form-row">
+        <input type="hidden" name="id" value="-1" />
+        <input type="hidden" name="tipo" value="crea" />
+        <input type="text" name="marca" placeholder="Marca">
+        <input type="text" name="modello" placeholder="Modello">
+        <input type="number" name="costo" placeholder="Costo" min="10" max="900">€
+      </div>
 
-      <input type="hidden" name="id" value="-1" />
-      <input type="hidden" name="tipo" value="crea" />
-      <input type="text" name="marca" placeholder="Marca">
-      <input type="text" name="modello" placeholder="Modello">
-      <input type="number" name="costo" value="100" placeholder="Costo" min="10" max="900">€
-
+      <div class="form-row">
         <select name="status">
           <option value="0" selected>Riparazione in corso</option>
           <option value="1">Riparazione conclusa</option>
           <option value="2">Prodotto ritirato dal cliente</option>
         </select>
+        <input type="email" name="mailCliente" placeholder="Mail Cliente">
+      </div>
 
-      <input type="email" name="mailCliente" placeholder="Mail Cliente">
+      <textarea id="nota" name="nota" placeholder="Scrivi qui la tua nota..."></textarea>
+      <input type="submit" value="Aggiungi Riparazione" class="submit-btn">
+    </form>
 
-        <textarea id="nota" name="nota" rows="4" cols="30" placeholder="Scrivi qui la tua nota..."></textarea>
-
-      <input type="submit" value="Aggiungi Riparazione">
-  </form>
+  </div>
 </footer>
 
 

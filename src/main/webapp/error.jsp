@@ -11,6 +11,11 @@
   <body bgcolor="708090">
     <p>Per favore, ritorna alla pagina precedente e riprova ad eseguire l'operazione.</p> <br>
     <h1><strong>ERRORE:<br> <%=request.getAttribute("errore")%></strong></h1> <br><br>
+    <%if (session.getAttribute("utente")!=null) {
+      %>
+    <a href="lavori.jsp">Ritorna alla pagina delle riparazioni</a>
+    <%}else{%>
     <a href="home.jsp">Ritorna alla Homepage</a>
+  <%}%>
   </body>
 </html>

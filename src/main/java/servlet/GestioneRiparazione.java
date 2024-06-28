@@ -17,13 +17,13 @@ import java.io.IOException;
 public class GestioneRiparazione extends HttpServlet
 {
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		doGet(req,resp);
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		final RequestDispatcher error = req.getRequestDispatcher("error.jsp");
 		final RequestDispatcher lavori = req.getRequestDispatcher("lavori.jsp");
@@ -34,8 +34,9 @@ public class GestioneRiparazione extends HttpServlet
 		final String campiVuoti = "I campi marca, modello, mail e costo non possono essere vuoti";
 		
 		
-		if ((tipo = req.getParameter("tipo")) != null)
+		if (req.getParameter("tipo") != null)
 		{
+			tipo = req.getParameter("tipo").toLowerCase();
 			id = Integer.parseInt(req.getParameter("id"));
 			
 			switch (tipo)
@@ -87,6 +88,14 @@ public class GestioneRiparazione extends HttpServlet
 				}
 				case "crea":
 				{
+					final String regex = "[a-z]{1,10}";
+					final String mailRegex = "[a-z0-9]{1,20}@[a-z]{1,10}\\.[a-z]{2,3}";
+					
+					final String lunghezzaErrata = "Marca/modello non possono essere più di 10 caratteri<br>La mail non può eccedere 33 caratteri.";
+					final String formatoErrato = "Il formato di marca, modello o mail cliente non è corretto.";
+					final String costoErrato = "Il costo deve essere compreso fra 0 e 999.";
+					final String costoNumerico = "Il costo deve essere un valore numerico";
+					
 					marca = req.getParameter("marca");
 					modello = req.getParameter("modello");
 					status = Integer.parseInt(req.getParameter("status"));
@@ -97,17 +106,39 @@ public class GestioneRiparazione extends HttpServlet
 					{
 						req.setAttribute("errore",campiVuoti);
 						error.forward(req,resp);
-						return;
+					}
+					else if (marca.length() > 10 || modello.length() > 10 || mailCliente.length() > 33)
+					{
+						req.setAttribute("errore",lunghezzaErrata);
+						error.forward(req,resp);
+					}
+					else if (!marca.toLowerCase().matches(regex) || !modello.toLowerCase().matches(regex) || !mailCliente.toLowerCase().matches(mailRegex))
+					{
+						req.setAttribute("errore",formatoErrato);
+						error.forward(req,resp);
 					}
 					else
 					{
-						costo = Integer.parseInt(req.getParameter("costo"));
+						try
+						{
+							costo = Integer.parseInt(req.getParameter("costo"));
+							if (costo < 0 || costo > 999)
+							{
+								req.setAttribute("errore",costoErrato);
+								error.forward(req,resp);
+							}
+							
+							RiparazioneDAO.doSave(new Riparazione(marca, modello, status, costo, nota, mailCliente));
+							req.getServletContext().setAttribute("listaRiparazioni", RiparazioneDAO.doRetrieveAll());
+							
+							lavori.forward(req,resp);
+						}
+						catch (NumberFormatException e)
+						{
+							req.setAttribute("errore", costoNumerico);
+							error.forward(req,resp);
+						}
 						
-					
-						RiparazioneDAO.doSave(new Riparazione(marca, modello, status, costo, nota, mailCliente));
-						req.getServletContext().setAttribute("listaRiparazioni", RiparazioneDAO.doRetrieveAll());
-						
-						lavori.forward(req,resp);
 					}
 					break;
 				}

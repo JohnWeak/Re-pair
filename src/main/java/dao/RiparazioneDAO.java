@@ -99,8 +99,15 @@ public abstract class RiparazioneDAO
 
 	public static ArrayList<Riparazione> doRetrieveCustomerRiparazioni(String email)
 	{
+		final ArrayList<Riparazione> list = new ArrayList<>();
+		
+		final String mailRegex = "[a-z0-9]{1,20}@[a-z]{1,10}\\.[a-z]{2,3}";
+		if (email == null || !email.toLowerCase().matches(mailRegex))
+		{
+			return list;
+		}
+		
 		Riparazione riparazione;
-		ArrayList<Riparazione> list = new ArrayList<>();
 		try
 		{
 			final Connection c = ConPool.getConnection();

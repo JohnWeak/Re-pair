@@ -17,13 +17,13 @@ import java.util.ArrayList;
 public class CercaRiparazione extends HttpServlet
 {
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		doGet(req,resp);
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		final String errorPage = "/error.jsp";
 		final String workSearchPage = "/risultati-ricerca-riparazione.jsp";

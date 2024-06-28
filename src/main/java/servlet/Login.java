@@ -1,15 +1,11 @@
 package servlet;
 
 import java.io.*;
-import java.util.ArrayList;
-
-import dao.RiparazioneDAO;
 import dao.UtenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import pojo.Riparazione;
 import pojo.Utente;
 
 /**@author Giovanni Liguori*/
@@ -34,7 +30,7 @@ public class Login extends HttpServlet
 		final String mail = request.getParameter("mail");
 		final String password = request.getParameter("password");
 		
-		if (mail == null || password == null || mail.isBlank() || password.isBlank())
+		if (mail == null || password == null || mail.isBlank() || password.isBlank() || mail.length() < 33 || password.length() < 6)
 		{
 			request.setAttribute("errore","I campi mail e password non possono essere vuoti!");
 			errorDispatcher.forward(request,response);

@@ -1,11 +1,13 @@
 package dao;
 
 import pojo.Admin;
+import pojo.Utente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**@author Giovanni Liguori*/
 public abstract class AdminDAO
@@ -36,9 +38,28 @@ public abstract class AdminDAO
 	
 	public static void doCreaUtente(String nome, String cognome, String mail, String password, boolean admin)
 	{
+		final String namesRegex = "[a-z]{1,10}";
+		final String passwordRegex = "[0-9]{1,5}";
+		final String mailRegex = "[a-z0-9]{1,20}@[a-z]{1,10}\\.[a-z]{2,3}";
+		
+		if (nome == null || cognome == null || mail == null || password == null ||
+			!nome.toLowerCase().matches(namesRegex) || !cognome.toLowerCase().matches(namesRegex) ||
+			!password.toLowerCase().matches(passwordRegex) || !mail.toLowerCase().matches(mailRegex)
+		)
+		{
+			return;
+		}
+		
 		try
 		{
 			final Connection con = ConPool.getConnection();
+			
+			final Utente utente = UtenteDAO.doRetrieveUtenteByMail(mail);
+			if (utente != null)
+			{
+				return;
+			}
+			
 			final PreparedStatement ps = con.prepareStatement("INSERT INTO utenti (`nome`, `cognome`, `mail`, `password`, `isAdmin`) VALUES (?,?,?,?,?)");
 			ps.setString(1, nome);
 			ps.setString(2, cognome);

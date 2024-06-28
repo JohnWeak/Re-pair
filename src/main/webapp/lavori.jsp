@@ -101,8 +101,10 @@
       <div class="form-row">
         <select name="status">
           <option value="0" selected>Riparazione in corso</option>
+          <!--
           <option value="1">Riparazione conclusa</option>
           <option value="2">Prodotto ritirato dal cliente</option>
+          -->
         </select>
         <input type="email" name="mailCliente" placeholder="Mail Cliente">
       </div>

@@ -77,6 +77,12 @@ public class GestioneUtente extends HttpServlet
 				req.setAttribute("errore", "Tutti i campi devono essere compilati <br> prima di poter salvare le modifche!");
 				error.forward(req, resp);
 			}
+			else if (nome.length() > 10 || cognome.length() > 10 || mail.length() > 29 || password.length() > 5)
+			{
+				final String errormsg = "I campi devono essere al più<br>10 -> nome/cognome<br>29 -> mail<br>•5 -> password";
+				
+				req.setAttribute("errore", errormsg);
+			}
 			else
 			{
 				admin = Boolean.parseBoolean(req.getParameter("admin"));

@@ -138,7 +138,7 @@ public abstract class UtenteDAO
 			final String password = rs.getString(5);
 			final boolean admin = rs.getBoolean(6);
 			
-			utente = new Utente(id, nome, cognome, mail, password,admin);
+			utente = new Utente(id, nome, cognome, mail, password, admin);
 		}catch (Exception e) { e.printStackTrace(); }
 		
 		return utente;
